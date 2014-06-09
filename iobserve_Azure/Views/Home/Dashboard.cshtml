@@ -1,0 +1,246 @@
+﻿@model iobserve_Azure.Models.DashboardModel
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+
+
+@using (Html.BeginForm())
+{
+
+    <table style="width:100%; margin-top:0px">
+        <tr style="background-color:black">
+            <td colspan="3">
+                <div style="font-family:Arial; padding:8px;  font-weight:bold; color:white">
+                    iobserve
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div style="width:100%; height:50px; padding-left:15px;   margin-top:5px; padding-right:15px;background-color:lightblue; border-radius:3px">
+                    <div style="-webkit-transform:translateY(50%)">
+                        @Html.RadioButtonFor(m => m.Duration, 5)<label>Previous Month</label>
+
+                        @Html.RadioButtonFor(m => m.Duration, 4)<label>Previous Week</label>
+                        @Html.RadioButtonFor(m => m.Duration, 3, new { @id = "rdcm" })<label>Current Month</label>
+                        @Html.RadioButtonFor(m => m.Duration, 2, new { @id = 1 })<label>Current Week</label>
+                        @Html.RadioButtonFor(m => m.Duration, 1, new { @id = 2 })<label style="margin-right:20px">Date Range</label>
+
+                        <label>Start Date</label>
+                        @Html.Kendo().DatePickerFor(m => m.StartDate).Enable(Model.Duration == 1).HtmlAttributes(new { @id = "dtFrom" })
+                        <label>End Date</label>
+                        @Html.Kendo().DatePickerFor(m => m.Enddate).Enable(Model.Duration == 1).HtmlAttributes(new { @id = "dtTo" })
+                        <input type="submit" value="Load" style="width:90px;vertical-align:middle" />
+                    </div>
+
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+
+            <td>
+                <div class="ChartArea">
+                    @(Html.Kendo().Chart<iobserve_Azure.Models.RiskLevel>()
+                    .Name("riskLevel").HtmlAttributes(new { @class = "Chart" })
+                .Title(title => title
+                .Color("White")
+                .Text("Risk Level")
+                )
+                .DataSource(ds =>
+                ds.Read(read => read.Action("_RiskLevelData", "Home")))
+                .Series(series =>
+                {
+                    series.Column(model => model.Hazard_Count).Name("Hazard").Color("red").Stack("group1");
+                    series.Column(model => model.Behv_Count).Name("Risky").Color("orange").Stack("group1");
+                    series.Column(model => model.GoodJob_Count).Name("Good Job").Color("green").Stack("group1");
+                })
+                .CategoryAxis(category => category
+                .Categories(model =>
+                model.Risk_Level
+
+                )
+
+
+
+                .Color("black")
+                .MajorGridLines(mlines => mlines
+                .Color("gray")
+                )
+                )
+                .ValueAxis(value => value
+                .Numeric().Color("black")
+                .MajorGridLines(minor => minor
+                .Visible(true)
+                ))
+                .Legend(legend => legend
+                .Color("black")
+                .Position(Kendo.Mvc.UI.ChartLegendPosition.Bottom)
+                )
+                .Title(title => title
+                .Color("black")
+                .Text("Observations by risk level")
+                )
+                .Tooltip(tooltip => tooltip
+                .Visible(true)
+                .Format("{0:N0}")
+                .Color("black")
+                ))
+
+                </div>
+            </td>
+            <td>
+                <div class="ChartArea">
+
+                    @(Html.Kendo().Chart<iobserve_Azure.Models.StatusModel>()
+                                .Name("chart").HtmlAttributes(new { @class = "Chart" })
+
+                    .Legend(legend =>
+                        {
+                            legend.Position(Kendo.Mvc.UI.ChartLegendPosition.Bottom);
+                            legend.Color("black");
+                        })
+                                     .DataSource(ds => ds.Read(read => read.Action("_StatusData", "Home")))
+             .Series(series =>
+             {
+                 series.Pie(model => model.Percent_Value, model => model.Status)
+                 .Labels(labels => labels
+                .Color("black")
+                .Background("Transparent")
+                     .Visible(true)
+                 .Template("#= kendo.format('{0:P}', percentage)#"));
+             })
+            .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0:N0}")
+            .Color("black")
+          )
+          .Title(title => title
+          .Color("black")
+          .Text("Status")
+          
+          )
+          
+
+                    )
+                </div>
+
+
+            </td>
+
+            <td>
+                <div class="ChartArea">
+                    @(Html.Kendo().Chart<iobserve_Azure.Models.StatusModel>()
+                                .Name("chartobvtypes").HtmlAttributes(new { @class = "Chart" })
+
+                    .Legend(legend =>
+                        {
+                            legend.Position(Kendo.Mvc.UI.ChartLegendPosition.Bottom);
+                            legend.Color("black");
+                        })
+                             .DataSource(ds => ds.Read(read => read.Action("_StatusDataPercentage", "Home")))
+             .Series(series =>
+             {
+                 series.Pie(model => model.Percent_Value, model => model.Status)
+                 .Labels(labels => labels
+                .Color("black")
+                .Background("Transparent")
+                     .Visible(true)
+                 .Template("#= kendo.format('{0:P}', percentage)#"));
+             })
+            .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0:N0}")
+            .Color("black")
+          )
+          .Title(title => title
+          .Color("black")
+          .Text("Observation Types")
+          )
+
+
+                    )
+                </div>
+            </td>
+
+
+        </tr>
+        <tr>
+            <td colspan="4">
+                <table style="margin-left:5px; margin-top:5px; width:100%">
+                    <tr>
+                        <td style="width:60%">
+                         <div style="height:25px; vertical-align:middle; background-color:#5B9BD5;color:white; font-family:Arial;font-size:12px; text-align:center; font-weight:bold">
+                             Observations submitted - Summary view
+                         </div>
+                               <div id="dvObservations">
+                            </div>
+                        </td>
+                        <td>
+                         
+                        </td>
+                    </tr>
+                </table>
+
+
+
+
+            </td>
+        </tr>
+    </table>
+
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //  $("#rdcm").prop("checked", true);
+
+        $('input[type="radio"]').change(function () {
+
+            var e = this;
+            if (e.id == "2") {
+                $('#dtFrom').data('kendoDatePicker').enable(true);
+                $('#dtTo').data('kendoDatePicker').enable(true);
+
+            }
+            else {
+                $('#dtFrom').data('kendoDatePicker').enable(false);
+                $('#dtTo').data('kendoDatePicker').enable(false);
+            }
+
+
+        });
+
+
+
+    });
+
+    $.ajax({
+        type: "GET",
+        url: "/Home/_LoadObservationPartialView",
+        contentType: "application/html;charset=utf-8",
+        dataType: "html",
+        success: function (evt) {
+            // UnblockUI();
+            //  alert("Loaded");
+            //wndObject.center().open();
+
+            var dv = $("#dvObservations");
+            dv.html('');
+            dv.html(evt);
+            debugger;
+        },
+        error: function (req, status, error) {
+            //UnblockUI();
+            alert("Error!Occured");
+        }
+    });
+
+
+</script>
+
+

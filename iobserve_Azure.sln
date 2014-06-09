@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iobserve_Azure", "iobserve_Azure\iobserve_Azure.csproj", "{8F4C2557-65FF-440F-BFA6-35125921AFC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iobserve.Data", "iobserve.Data\iobserve.Data.csproj", "{26E68743-56DD-40D4-860D-DAFB0EEE7F75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F4C2557-65FF-440F-BFA6-35125921AFC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F4C2557-65FF-440F-BFA6-35125921AFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F4C2557-65FF-440F-BFA6-35125921AFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F4C2557-65FF-440F-BFA6-35125921AFC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26E68743-56DD-40D4-860D-DAFB0EEE7F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26E68743-56DD-40D4-860D-DAFB0EEE7F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26E68743-56DD-40D4-860D-DAFB0EEE7F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26E68743-56DD-40D4-860D-DAFB0EEE7F75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="iobserverContext" namespace="iobserve.Data" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="iobserverContext" backend="azure" default-schema="dbo" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="iobserve.Data" default="true">
+      <orm:class name="Report" uniqueId="481e9339-df96-44a9-8f56-e52d3518c37b">
+        <orm:table name="reports" schema="iobserve1" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="backend" field-name="___version">
+          <orm:column name="__version" sql-type="timestamp" nullable="false" length="0" scale="0" backend-version="true" ado-type="Int64" />
+        </orm:concurrency>
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="adfd823b-0e8e-45c1-a560-db3f5eefa8be" type="System.String">
+          <orm:column name="id" sql-type="nvarchar" nullable="false" length="255" scale="0" primary-key="true" has-default-value="true" backend-calculated="true" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="___createdAt" property="__createdAt" behavior="readwrite" uniqueId="531f43cd-96a2-43ed-a42c-760d7f289a50" type="System.DateTimeOffset">
+          <orm:column name="__createdAt" sql-type="datetimeoffset" nullable="false" length="3" scale="0" has-default-value="true" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="___updatedAt" property="__updatedAt" behavior="readwrite" uniqueId="17e5aae4-5006-4d03-8e3d-cd2bb00219c0" type="System.Nullable`1[[System.DateTimeOffset, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="__updatedAt" sql-type="datetimeoffset" nullable="true" length="3" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="___version" property="__version" behavior="readwrite" uniqueId="68cee399-1c89-49c4-bc93-5f03d5201f23" type="System.Int64">
+          <orm:column name="__version" sql-type="timestamp" nullable="false" length="0" scale="0" backend-version="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_media_video_id" property="Media_video_id" behavior="readwrite" uniqueId="295502a5-9d6b-4cb2-9597-3ce316cd2508" type="System.String">
+          <orm:column name="media_video_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_followuprequired" property="Followuprequired" behavior="readwrite" uniqueId="c034f0df-39ca-46db-a2d8-893b744427c9" type="System.String">
+          <orm:column name="followuprequired" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_location" property="Location" behavior="readwrite" uniqueId="4a4d3e3d-79f0-443c-bb3c-e03bab1d6628" type="System.String">
+          <orm:column name="location" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_risklevel" property="Risklevel" behavior="readwrite" uniqueId="a6ea06b3-f6e3-438c-9190-b61ab6ca42c3" type="System.String">
+          <orm:column name="risklevel" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_remarks" property="Remarks" behavior="readwrite" uniqueId="b4a9b7db-21ac-48dc-83f1-7ba95e96dbd9" type="System.String">
+          <orm:column name="remarks" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_lng" property="Lng" behavior="readwrite" uniqueId="c84f731a-fc17-4e25-82a9-7c093000bf55" type="System.String">
+          <orm:column name="lng" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_media_audio_id" property="Media_audio_id" behavior="readwrite" uniqueId="ad8676c1-a1cd-406e-94e4-5c060ebc07fb" type="System.String">
+          <orm:column name="media_audio_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_status_label_id" property="Status_label_id" behavior="readwrite" uniqueId="fcfa4411-41d6-47c8-bd25-2a6f270aa376" type="System.String">
+          <orm:column name="status_label_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_customer" property="Customer" behavior="readwrite" uniqueId="5838b709-0e83-4a84-bd4a-349cea7cbdaa" type="System.String">
+          <orm:column name="customer" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_location_scenario_id" property="Location_scenario_id" behavior="readwrite" uniqueId="365a53f1-4c7f-46e4-b4eb-76e7e9d03a19" type="System.String">
+          <orm:column name="location_scenario_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_hazardeliminated" property="Hazardeliminated" behavior="readwrite" uniqueId="f940684a-cb53-4198-9ed5-f9aa6f075154" type="System.String">
+          <orm:column name="hazardeliminated" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_supnotified" property="Supnotified" behavior="readwrite" uniqueId="9583f981-0ec4-45b8-9e10-9453631dc3b6" type="System.String">
+          <orm:column name="supnotified" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_observer_id" property="Observer_id" behavior="readwrite" uniqueId="478a286a-648c-4997-ba89-249e82707f6c" type="System.String">
+          <orm:column name="observer_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_actiontaken" property="Actiontaken" behavior="readwrite" uniqueId="bec8ab96-1bf9-4e2b-89d2-9064b165fc20" type="System.String">
+          <orm:column name="actiontaken" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_response_array" property="Response_array" behavior="readwrite" uniqueId="0f02a719-0f97-418a-9f1e-1aed9a133a91" type="System.String">
+          <orm:column name="response_array" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_media_picture_id" property="Media_picture_id" behavior="readwrite" uniqueId="0358a2a1-606f-4d59-b3a0-86dc67dd53cf" type="System.String">
+          <orm:column name="media_picture_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_lat" property="Lat" behavior="readwrite" uniqueId="7cecdf54-2c1d-4c11-9bd4-58cd9b0145f0" type="System.String">
+          <orm:column name="lat" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_reportstatus" property="Reportstatus" behavior="readwrite" uniqueId="af4d6c38-e4cf-4605-b1dc-8336375cb364" type="System.String">
+          <orm:column name="reportstatus" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:index name="__createdAt" clustered="true">
+          <orm:columnMapping>
+            <orm:column name="__createdAt" sql-type="datetimeoffset" nullable="false" length="3" scale="0" has-default-value="true" ado-type="DateTime" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="location_scenario_id">
+          <orm:columnMapping>
+            <orm:column name="location_scenario_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="observer_id">
+          <orm:columnMapping>
+            <orm:column name="observer_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="V_report" uniqueId="0deb6e13-599b-49dc-b976-ecf0fe257e2e">
+        <orm:table name="v_reports" schema="iobserve1" view="true" />
+        <orm:identity>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_supnotified" property="Supnotified" behavior="readwrite" uniqueId="951adc7e-a2cc-42d5-9f54-bebd35452dda" type="System.String">
+          <orm:column name="supnotified" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_status_text" property="Status_text" behavior="readwrite" uniqueId="449cdce7-eadc-403a-9b6d-7ce00d91318b" type="System.String">
+          <orm:column name="Status_text" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_scenario_Name" property="Scenario_Name" behavior="readwrite" uniqueId="cd1af7a7-c2d4-460b-bd42-d7711230641b" type="System.String">
+          <orm:column name="Scenario_Name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_risklevel" property="Risklevel" behavior="readwrite" uniqueId="385c1e18-34aa-4a18-aa0b-cb7fa93f05b0" type="System.String">
+          <orm:column name="risklevel" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_response_array" property="Response_array" behavior="readwrite" uniqueId="db77d883-8916-4263-80d9-f274a05bd8c2" type="System.String">
+          <orm:column name="response_array" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_remarks" property="Remarks" behavior="readwrite" uniqueId="ef2d92fa-ffeb-4cec-874c-a4e2d77a17ed" type="System.String">
+          <orm:column name="remarks" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_qr_id" property="Qr_id" behavior="readwrite" uniqueId="3955c132-34a4-4088-b884-86ba25f3ea8a" type="System.String">
+          <orm:column name="qr_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_observer_id" property="Observer_id" behavior="readwrite" uniqueId="1ee47833-443e-46cb-9c93-f0e29f5bccc4" type="System.String">
+          <orm:column name="observer_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_media_video_id" property="Media_video_id" behavior="readwrite" uniqueId="7107fa80-ff24-4ebb-b0f7-fc6e6729763e" type="System.String">
+          <orm:column name="media_video_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_media_picture_id" property="Media_picture_id" behavior="readwrite" uniqueId="ecc7533f-2f1f-4a77-a950-f4725e107201" type="System.String">
+          <orm:column name="media_picture_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_media_audio_id" property="Media_audio_id" behavior="readwrite" uniqueId="988e377e-a64d-403b-b2aa-a7c56f52be7f" type="System.String">
+          <orm:column name="media_audio_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_location_scenario_id" property="Location_scenario_id" behavior="readwrite" uniqueId="e3f12d1a-c6a8-4159-abf7-cd5b4faba8fb" type="System.String">
+          <orm:column name="location_scenario_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_location_Name" property="Location_Name" behavior="readwrite" uniqueId="812dcbe4-c7b0-4d79-aca6-d4adf282876e" type="System.String">
+          <orm:column name="Location_Name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_location" property="Location" behavior="readwrite" uniqueId="b3c8681c-d146-45ed-9b97-493c5c9f319f" type="System.String">
+          <orm:column name="location" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_lng" property="Lng" behavior="readwrite" uniqueId="6caa4403-2d1b-4640-a666-f6183553cb5a" type="System.String">
+          <orm:column name="lng" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_lat" property="Lat" behavior="readwrite" uniqueId="ce014665-a1cb-42a0-a507-771a49bce2da" type="System.String">
+          <orm:column name="lat" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_language_code" property="Language_code" behavior="readwrite" uniqueId="b08d2cd0-b895-4251-822e-54e2dda334f0" type="System.String">
+          <orm:column name="language_code" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="5054fc59-b927-40d2-9bca-67d4c378fb9c" type="System.String">
+          <orm:column name="id" sql-type="nvarchar" nullable="false" length="255" scale="0" primary-key="true" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_hazardeliminated" property="Hazardeliminated" behavior="readwrite" uniqueId="b0ba3c9f-0a62-4351-830e-228fbe14d2da" type="System.String">
+          <orm:column name="hazardeliminated" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_followuprequired" property="Followuprequired" behavior="readwrite" uniqueId="d47da503-0a00-4b0f-b6ee-2d9d54c8a74f" type="System.String">
+          <orm:column name="followuprequired" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_erp_userid" property="Erp_userid" behavior="readwrite" uniqueId="5c858848-7367-482f-a24b-8beee3d133b6" type="System.String">
+          <orm:column name="erp_userid" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_customer" property="Customer" behavior="readwrite" uniqueId="710e3883-77a8-4c28-84f1-81bed03fc09e" type="System.String">
+          <orm:column name="customer" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_company_name" property="Company_name" behavior="readwrite" uniqueId="804f63f4-4957-4f83-a0b8-e587080c8e46" type="System.String">
+          <orm:column name="company_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_actiontaken" property="Actiontaken" behavior="readwrite" uniqueId="99740be8-59a0-4fdd-b3e8-815f3b8ce1e2" type="System.String">
+          <orm:column name="actiontaken" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="___createdAt" property="__createdAt" behavior="readwrite" uniqueId="ee35f910-5213-4b20-8304-c17f0fbf57fc" type="System.DateTimeOffset">
+          <orm:column name="__createdAt" sql-type="datetimeoffset" nullable="false" length="3" scale="0" ado-type="DateTime" />
+        </orm:field>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="iobserve1">
+      <orm:table name="reports" schema="iobserve1">
+        <orm:column name="id" sql-type="nvarchar" nullable="false" length="255" scale="0" primary-key="true" has-default-value="true" backend-calculated="true" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="__createdAt" sql-type="datetimeoffset" nullable="false" length="3" scale="0" has-default-value="true" ado-type="DateTime" />
+        <orm:column name="__updatedAt" sql-type="datetimeoffset" nullable="true" length="3" scale="0" ado-type="DateTime" />
+        <orm:column name="__version" sql-type="timestamp" nullable="false" length="0" scale="0" backend-version="true" ado-type="Int64" />
+        <orm:column name="media_video_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="followuprequired" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="location" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="risklevel" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="remarks" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="lng" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="media_audio_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="status_label_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="customer" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="location_scenario_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="hazardeliminated" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="supnotified" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="observer_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="actiontaken" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="response_array" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="media_picture_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="lat" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="reportstatus" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:index name="__createdAt" clustered="true">
+          <orm:columnMapping>
+            <orm:column name="__createdAt" sql-type="datetimeoffset" nullable="false" length="3" scale="0" has-default-value="true" ado-type="DateTime" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="location_scenario_id">
+          <orm:columnMapping>
+            <orm:column name="location_scenario_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="observer_id">
+          <orm:columnMapping>
+            <orm:column name="observer_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:table>
+      <orm:table name="v_reports" schema="iobserve1" view="true">
+        <orm:column name="supnotified" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="Status_text" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="Scenario_Name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="risklevel" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="response_array" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="remarks" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="qr_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="observer_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="media_video_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="media_picture_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="media_audio_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="location_scenario_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="Location_Name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="location" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="lng" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="lat" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="language_code" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="id" sql-type="nvarchar" nullable="false" length="255" scale="0" primary-key="true" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="hazardeliminated" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="followuprequired" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="erp_userid" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="customer" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="company_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="actiontaken" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="__createdAt" sql-type="datetimeoffset" nullable="false" length="3" scale="0" ado-type="DateTime" />
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:source-strategy>Property</orm:source-strategy>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <AppConfigConnectionPropertyName>Connection</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>server=tcp:wwl8j4ylj9.database.windows.net,1433;database=iObserve01;user id=hse2go@wwl8j4ylj9;password=azure@108;trusted_connection=False;encrypt=True;connection timeout=30</AppConfigConnectionString>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <PluralizationMode>Singularize</PluralizationMode>
+      </ClassRules>
+      <FieldRules>
+        <AddPrefix>_</AddPrefix>
+        <CaseMode>CamelCase</CaseMode>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>PascalCase</CaseMode>
+      </PropertyRules>
+      <NavigationPropertyRules />
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <MappingDefinitionType>Xml</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings />
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>Azure</Backend>
+        <ProviderName>System.Data.SqlClient</ProviderName>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="481e9339-df96-44a9-8f56-e52d3518c37b" name="Report" namespace="iobserve.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Backend" concurrencyMember="__version" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="adfd823b-0e8e-45c1-a560-db3f5eefa8be" name="Id" label="Id : String" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="531f43cd-96a2-43ed-a42c-760d7f289a50" name="__createdAt" type="DateTimeOffset" label="__createdAt : DateTimeOffset" kind="Persistent" fieldName="___createdAt" />
+      <Property Id="17e5aae4-5006-4d03-8e3d-cd2bb00219c0" name="__updatedAt" type="DateTimeOffset" label="__updatedAt : DateTimeOffset" nullable="true" kind="Persistent" fieldName="___updatedAt" />
+      <Property Id="68cee399-1c89-49c4-bc93-5f03d5201f23" name="__version" type="Int64" label="__version : Int64" kind="Persistent" fieldName="___version" />
+      <Property Id="bec8ab96-1bf9-4e2b-89d2-9064b165fc20" name="Actiontaken" label="Actiontaken : String" kind="Persistent" fieldName="_actiontaken" />
+      <Property Id="5838b709-0e83-4a84-bd4a-349cea7cbdaa" name="Customer" label="Customer : String" kind="Persistent" fieldName="_customer" />
+      <Property Id="c034f0df-39ca-46db-a2d8-893b744427c9" name="Followuprequired" label="Followuprequired : String" kind="Persistent" fieldName="_followuprequired" />
+      <Property Id="f940684a-cb53-4198-9ed5-f9aa6f075154" name="Hazardeliminated" label="Hazardeliminated : String" kind="Persistent" fieldName="_hazardeliminated" />
+      <Property Id="7cecdf54-2c1d-4c11-9bd4-58cd9b0145f0" name="Lat" label="Lat : String" kind="Persistent" fieldName="_lat" />
+      <Property Id="c84f731a-fc17-4e25-82a9-7c093000bf55" name="Lng" label="Lng : String" kind="Persistent" fieldName="_lng" />
+      <Property Id="4a4d3e3d-79f0-443c-bb3c-e03bab1d6628" name="Location" label="Location : String" kind="Persistent" fieldName="_location" />
+      <Property Id="365a53f1-4c7f-46e4-b4eb-76e7e9d03a19" name="Location_scenario_id" label="Location_scenario_id : String" kind="Persistent" fieldName="_location_scenario_id" />
+      <Property Id="ad8676c1-a1cd-406e-94e4-5c060ebc07fb" name="Media_audio_id" label="Media_audio_id : String" kind="Persistent" fieldName="_media_audio_id" />
+      <Property Id="0358a2a1-606f-4d59-b3a0-86dc67dd53cf" name="Media_picture_id" label="Media_picture_id : String" kind="Persistent" fieldName="_media_picture_id" />
+      <Property Id="295502a5-9d6b-4cb2-9597-3ce316cd2508" name="Media_video_id" label="Media_video_id : String" kind="Persistent" fieldName="_media_video_id" />
+      <Property Id="478a286a-648c-4997-ba89-249e82707f6c" name="Observer_id" label="Observer_id : String" kind="Persistent" fieldName="_observer_id" />
+      <Property Id="b4a9b7db-21ac-48dc-83f1-7ba95e96dbd9" name="Remarks" label="Remarks : String" kind="Persistent" fieldName="_remarks" />
+      <Property Id="af4d6c38-e4cf-4605-b1dc-8336375cb364" name="Reportstatus" label="Reportstatus : String" kind="Persistent" fieldName="_reportstatus" />
+      <Property Id="0f02a719-0f97-418a-9f1e-1aed9a133a91" name="Response_array" label="Response_array : String" kind="Persistent" fieldName="_response_array" />
+      <Property Id="a6ea06b3-f6e3-438c-9190-b61ab6ca42c3" name="Risklevel" label="Risklevel : String" kind="Persistent" fieldName="_risklevel" />
+      <Property Id="fcfa4411-41d6-47c8-bd25-2a6f270aa376" name="Status_label_id" label="Status_label_id : String" kind="Persistent" fieldName="_status_label_id" />
+      <Property Id="9583f981-0ec4-45b8-9e10-9453631dc3b6" name="Supnotified" label="Supnotified : String" kind="Persistent" fieldName="_supnotified" />
+    </DomainClass>
+    <DomainClass Id="0deb6e13-599b-49dc-b976-ecf0fe257e2e" name="V_report" namespace="iobserve.Data" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="ee35f910-5213-4b20-8304-c17f0fbf57fc" name="__createdAt" type="DateTimeOffset" label="__createdAt : DateTimeOffset" kind="Persistent" fieldName="___createdAt" />
+      <Property Id="99740be8-59a0-4fdd-b3e8-815f3b8ce1e2" name="Actiontaken" label="Actiontaken : String" kind="Persistent" fieldName="_actiontaken" />
+      <Property Id="804f63f4-4957-4f83-a0b8-e587080c8e46" name="Company_name" label="Company_name : String" kind="Persistent" fieldName="_company_name" />
+      <Property Id="710e3883-77a8-4c28-84f1-81bed03fc09e" name="Customer" label="Customer : String" kind="Persistent" fieldName="_customer" />
+      <Property Id="5c858848-7367-482f-a24b-8beee3d133b6" name="Erp_userid" label="Erp_userid : String" kind="Persistent" fieldName="_erp_userid" />
+      <Property Id="d47da503-0a00-4b0f-b6ee-2d9d54c8a74f" name="Followuprequired" label="Followuprequired : String" kind="Persistent" fieldName="_followuprequired" />
+      <Property Id="b0ba3c9f-0a62-4351-830e-228fbe14d2da" name="Hazardeliminated" label="Hazardeliminated : String" kind="Persistent" fieldName="_hazardeliminated" />
+      <Property Id="5054fc59-b927-40d2-9bca-67d4c378fb9c" name="Id" label="Id : String" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="b08d2cd0-b895-4251-822e-54e2dda334f0" name="Language_code" label="Language_code : String" kind="Persistent" fieldName="_language_code" />
+      <Property Id="ce014665-a1cb-42a0-a507-771a49bce2da" name="Lat" label="Lat : String" kind="Persistent" fieldName="_lat" />
+      <Property Id="6caa4403-2d1b-4640-a666-f6183553cb5a" name="Lng" label="Lng : String" kind="Persistent" fieldName="_lng" />
+      <Property Id="b3c8681c-d146-45ed-9b97-493c5c9f319f" name="Location" label="Location : String" kind="Persistent" fieldName="_location" />
+      <Property Id="812dcbe4-c7b0-4d79-aca6-d4adf282876e" name="Location_Name" label="Location_Name : String" kind="Persistent" fieldName="_location_Name" />
+      <Property Id="e3f12d1a-c6a8-4159-abf7-cd5b4faba8fb" name="Location_scenario_id" label="Location_scenario_id : String" kind="Persistent" fieldName="_location_scenario_id" />
+      <Property Id="988e377e-a64d-403b-b2aa-a7c56f52be7f" name="Media_audio_id" label="Media_audio_id : String" kind="Persistent" fieldName="_media_audio_id" />
+      <Property Id="ecc7533f-2f1f-4a77-a950-f4725e107201" name="Media_picture_id" label="Media_picture_id : String" kind="Persistent" fieldName="_media_picture_id" />
+      <Property Id="7107fa80-ff24-4ebb-b0f7-fc6e6729763e" name="Media_video_id" label="Media_video_id : String" kind="Persistent" fieldName="_media_video_id" />
+      <Property Id="1ee47833-443e-46cb-9c93-f0e29f5bccc4" name="Observer_id" label="Observer_id : String" kind="Persistent" fieldName="_observer_id" />
+      <Property Id="3955c132-34a4-4088-b884-86ba25f3ea8a" name="Qr_id" label="Qr_id : String" kind="Persistent" fieldName="_qr_id" />
+      <Property Id="ef2d92fa-ffeb-4cec-874c-a4e2d77a17ed" name="Remarks" label="Remarks : String" kind="Persistent" fieldName="_remarks" />
+      <Property Id="db77d883-8916-4263-80d9-f274a05bd8c2" name="Response_array" label="Response_array : String" kind="Persistent" fieldName="_response_array" />
+      <Property Id="385c1e18-34aa-4a18-aa0b-cb7fa93f05b0" name="Risklevel" label="Risklevel : String" kind="Persistent" fieldName="_risklevel" />
+      <Property Id="cd1af7a7-c2d4-460b-bd42-d7711230641b" name="Scenario_Name" label="Scenario_Name : String" kind="Persistent" fieldName="_scenario_Name" />
+      <Property Id="449cdce7-eadc-403a-9b6d-7ce00d91318b" name="Status_text" label="Status_text : String" kind="Persistent" fieldName="_status_text" />
+      <Property Id="951adc7e-a2cc-42d5-9f54-bebd35452dda" name="Supnotified" label="Supnotified : String" kind="Persistent" fieldName="_supnotified" />
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="dbd21483-cbc0-4e77-b918-7a8ac445e471">
+      <domainContainer name="iobserverContext" namespace="iobserve.Data" showPropertiesCompartment="true">
+        <entitySetProperty name="Reports" namespace="iobserve.Data" type="Report" label="Reports : IQueryable&lt;iobserve.Data.Report&gt;" />
+        <entitySetProperty name="V_reports" namespace="iobserve.Data" type="V_report" label="V_reports : IQueryable&lt;iobserve.Data.V_report&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>
