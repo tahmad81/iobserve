@@ -23,7 +23,10 @@ namespace iobserve_Azure.Models
 
         [Display(Name = "Risk Eliminated ?")]
         public string  Risk_Eliminated { get; set; }
-    
+        public string Risk_FullName { get; set; }
+        
+        [Display(Name = "Status")]
+        public string StatusText { get; set; }
     }
 
 }

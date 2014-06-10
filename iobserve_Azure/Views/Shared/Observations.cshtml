@@ -4,16 +4,19 @@
     column.Bound(m => m.Date);
     column.Bound(m => m.Risk_Level);
     column.Bound(m => m.Risk_Type);
+    column.Bound(m => m.StatusText);
     column.Bound(m => m.Supervisor_Notified);
     column.Bound(m => m.Risk_Eliminated);
 
 })
 .DataSource(datasource => datasource
     .Ajax()
-    .Read(read => read.Action("_LoadObservations", "Home"))
+            .Read(read => read.Action("_LoadObservations", "Home", new { gridAction = "true" }))
 )
-.Pageable()
+
 .Groupable()
 .Filterable()
 .Sortable()
+.Scrollable()
+.Pageable()
 )

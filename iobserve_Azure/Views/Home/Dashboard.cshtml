@@ -70,6 +70,10 @@
                 .Color("gray")
                 )
                 )
+                .Events(events => events
+    .SeriesClick("SeriesClick")
+
+                )
                 .ValueAxis(value => value
                 .Numeric().Color("black")
                 .MajorGridLines(minor => minor
@@ -120,9 +124,12 @@
           .Title(title => title
           .Color("black")
           .Text("Status")
-          
+
           )
-          
+          .Events(events =>
+events.SeriesClick("StatusPieClick")
+
+          )
 
                     )
                 </div>
@@ -159,7 +166,10 @@
           .Color("black")
           .Text("Observation Types")
           )
+          .Events(events =>
+events.SeriesClick("TypePieClick")
 
+          )
 
                     )
                 </div>
@@ -172,15 +182,13 @@
                 <table style="margin-left:5px; margin-top:5px; width:100%">
                     <tr>
                         <td style="width:60%">
-                         <div style="height:25px; vertical-align:middle; background-color:#5B9BD5;color:white; font-family:Arial;font-size:12px; text-align:center; font-weight:bold">
-                             Observations submitted - Summary view
-                         </div>
-                               <div id="dvObservations">
+                            <div style="height:25px; vertical-align:middle; background-color:#5B9BD5;color:white; font-family:Arial;font-size:12px; text-align:center; font-weight:bold">
+                                Observations submitted - Summary view
+                            </div>
+                            <div id="dvObservations">
                             </div>
                         </td>
-                        <td>
-                         
-                        </td>
+                        <td></td>
                     </tr>
                 </table>
 
@@ -198,20 +206,24 @@
     $(document).ready(function () {
 
         //  $("#rdcm").prop("checked", true);
-
         $('input[type="radio"]').change(function () {
-
             var e = this;
             if (e.id == "2") {
                 $('#dtFrom').data('kendoDatePicker').enable(true);
                 $('#dtTo').data('kendoDatePicker').enable(true);
-
             }
             else {
                 $('#dtFrom').data('kendoDatePicker').enable(false);
                 $('#dtTo').data('kendoDatePicker').enable(false);
             }
+            debugger;
+            //var d = new Date();
+            //var dd = new Date(d.setDate(d.getDate() - 30));
 
+            //var day = d.getDay();
+            //diff = d.getDate() - day + (day == 0 ? -6 : 0);
+            //var PweekStartDate = Date(d.setDate(diff));
+            //alert(PweekStartDate);
 
         });
 
@@ -232,15 +244,34 @@
             var dv = $("#dvObservations");
             dv.html('');
             dv.html(evt);
-            debugger;
+            // debugger;
         },
         error: function (req, status, error) {
             //UnblockUI();
             alert("Error!Occured");
         }
     });
+    function SeriesClick(e) {
+        debugger;
+        var name = e.series.name;
+        //var item = e.dataItem.Risk_Type;
+        $("#obsGrid").data("kendoGrid").dataSource.read({ category: name, dataType: "1",riskLevel:e.category ,gridAction:"False"});
 
+    }
+    function StatusPieClick(e) {
+        debugger;
+        var name = e.series.name;
+        var cat = e.category;
+        //var item = e.dataItem.Risk_Type;
+        $("#obsGrid").data("kendoGrid").dataSource.read({ category: cat, dataType: "2", gridAction: "False" });
 
+    }
+    function TypePieClick(e) {
+        debugger;
+        var name = e.series.name;
+        var cat = e.category;
+        //var item = e.dataItem.Risk_Type;
+        $("#obsGrid").data("kendoGrid").dataSource.read({ category: cat, dataType: "3", gridAction: "False" });
+
+    }
 </script>
-
-

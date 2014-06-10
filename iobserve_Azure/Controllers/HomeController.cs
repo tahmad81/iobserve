@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using iobserve.Data;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using System.Diagnostics;
 namespace iobserve_Azure.Controllers
 {
     public class HomeController : Controller
@@ -19,11 +20,37 @@ namespace iobserve_Azure.Controllers
             SetSession(startDate, endData);
             return View(new Models.DashboardModel() { Duration = 3, StartDate = DateTime.Today.AddDays(-1), Enddate = DateTime.Today });
         }
-        public ActionResult _LoadObservations([DataSourceRequest] DataSourceRequest request)
+        public ActionResult _LoadObservations([DataSourceRequest] DataSourceRequest request, string category, string dataType, string riskLevel, string gridAction)
         {
-            var data = Load_Observations();
-            return Json( data.ToDataSourceResult(request),JsonRequestBehavior.AllowGet);
+            var currentList = new List<Models.Observations>();
+            if (gridAction.Equals("False"))
+                currentList = Load_Observations();
+            var sessionData = System.Web.HttpContext.Current.Session["gridData"] as List<Models.Observations>;
 
+            if (gridAction.Equals("False"))
+            {
+                if (dataType.Equals("1"))
+                {
+                    category = category == "Risky" ? "Risky Behavior" : category;
+                    currentList = currentList.Where(a => a.Risk_Type == category && a.Risk_Level == riskLevel).ToList();
+                }
+                else if (dataType.Equals("2"))
+                {
+                    currentList = currentList.Where(a => a.StatusText == category).ToList();
+                }
+                else
+                {
+                    category = category == "Risky" ? "Risky Behavior" : category;
+                    currentList = currentList.Where(a => a.Risk_Type == category).ToList();
+                }
+                System.Web.HttpContext.Current.Session["gridData"] = currentList;
+                return Json(currentList.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var data = System.Web.HttpContext.Current.Session["gridData"] as List<Models.Observations>;
+                return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            }
         }
         public ActionResult _LoadObservationPartialView()
         {
@@ -37,11 +64,20 @@ namespace iobserve_Azure.Controllers
         #region Private Methods
         private void SetSession(DateTime startDate, DateTime endData)
         {
-            using (iobserverContext context = new iobserverContext())
+            try
             {
-                var data = context.V_reports.Where(a => a.Language_code == "en" && a.__createdAt >= startDate && a.__createdAt <= endData).ToList();
+                using (iobserverContext context = new iobserverContext())
+                {
+                    var data = context.V_reports.Where(a => a.Language_code == "en" && a.__createdAt >= startDate && a.__createdAt <= endData).ToList();
 
-                System.Web.HttpContext.Current.Session.Add("data", data);
+                    System.Web.HttpContext.Current.Session.Add("data", data);
+                    System.Web.HttpContext.Current.Session.Add("gridData", Load_Observations());
+                }
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e.Message);
+
             }
         }
         private List<Models.Observations> Load_Observations()
@@ -57,7 +93,9 @@ namespace iobserve_Azure.Controllers
                                      Risk_Eliminated = "Yes",
                                      Risk_Level = obs.Risklevel,
                                      Risk_Type = obs.Scenario_Name,
-                                     Supervisor_Notified = obs.Supnotified
+                                     Supervisor_Notified = obs.Supnotified,
+                                     StatusText = obs.Status_text
+
                                  }).ToList();
 
                 return modeldata;
@@ -69,7 +107,7 @@ namespace iobserve_Azure.Controllers
         public ActionResult Dashboard(Models.DashboardModel model)
         {
             DateTime baseDate = DateTime.Today;
-
+            DateTime startDate, endDate;
             var today = baseDate;
             var yesterday = baseDate.AddDays(-1);
             var thisWeekStart = baseDate.AddDays(-(int)baseDate.DayOfWeek);
@@ -88,15 +126,23 @@ namespace iobserve_Azure.Controllers
                     break;
                 case 2:
                     SetSession(thisWeekStart, DateTime.Today);
+                    model.StartDate = thisWeekStart;
+                    model.Enddate = DateTime.Today;
                     break;
                 case 3:
                     SetSession(thisMonthStart, DateTime.Today);
+                    model.StartDate = thisMonthStart;
+                    model.Enddate = DateTime.Today;
                     break;
                 case 4:
                     SetSession(lastWeekStart, lastWeekEnd);
+                    model.StartDate = lastWeekStart;
+                    model.Enddate = lastWeekEnd;
                     break;
                 case 5:
                     SetSession(lastMonthStart, lastMonthEnd);
+                    model.StartDate = lastMonthStart;
+                    model.Enddate = lastMonthEnd;
                     break;
 
 
