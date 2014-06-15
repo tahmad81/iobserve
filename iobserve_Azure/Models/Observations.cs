@@ -27,6 +27,9 @@ namespace iobserve_Azure.Models
         
         [Display(Name = "Status")]
         public string StatusText { get; set; }
+        public string Lat { get; set; }
+        public string Long { get; set; }
+    
     }
 
 }

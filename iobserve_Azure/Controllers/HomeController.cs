@@ -94,7 +94,9 @@ namespace iobserve_Azure.Controllers
                                      Risk_Level = obs.Risklevel,
                                      Risk_Type = obs.Scenario_Name,
                                      Supervisor_Notified = obs.Supnotified,
-                                     StatusText = obs.Status_text
+                                     StatusText = obs.Status_text,
+                                     Long = obs.Lng,
+                                     Lat = obs.Lat
 
                                  }).ToList();
 

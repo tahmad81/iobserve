@@ -4,6 +4,7 @@
     ViewBag.Title = "Dashboard";
 }
 
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
 
 
 @using (Html.BeginForm())
@@ -181,20 +182,20 @@ events.SeriesClick("TypePieClick")
             <td colspan="4">
                 <table style="margin-left:5px; margin-top:5px; width:100%">
                     <tr>
-                        <td style="width:60%">
+                        <td style="width:50%; vertical-align:top" rowspan="2">
                             <div style="height:25px; vertical-align:middle; background-color:#5B9BD5;color:white; font-family:Arial;font-size:12px; text-align:center; font-weight:bold">
                                 Observations submitted - Summary view
                             </div>
                             <div id="dvObservations">
                             </div>
                         </td>
-                        <td></td>
+                        <td style="width:50%; vertical-align:top">
+                            <div id="dvMap" style="width:97%; position:relative; height:370px; margin-left:5px; margin-right:0px; border:1px solid black">
+
+                            </div>
+                        </td>
                     </tr>
                 </table>
-
-
-
-
             </td>
         </tr>
     </table>
@@ -202,7 +203,8 @@ events.SeriesClick("TypePieClick")
 }
 
 <script type="text/javascript">
-
+    var key = 'AonlkOuuylj2aEQIvN5fkFdxQ5b9HCQBa4hV2szt_W_VYuQ5CmWvAJN4asfchqhR';
+    var long, lat;
     $(document).ready(function () {
 
         //  $("#rdcm").prop("checked", true);
@@ -227,7 +229,7 @@ events.SeriesClick("TypePieClick")
 
         });
 
-
+        //getMap();
 
     });
 
@@ -255,7 +257,7 @@ events.SeriesClick("TypePieClick")
         debugger;
         var name = e.series.name;
         //var item = e.dataItem.Risk_Type;
-        $("#obsGrid").data("kendoGrid").dataSource.read({ category: name, dataType: "1",riskLevel:e.category ,gridAction:"False"});
+        $("#obsGrid").data("kendoGrid").dataSource.read({ category: name, dataType: "1", riskLevel: e.category, gridAction: "False" });
 
     }
     function StatusPieClick(e) {
@@ -272,6 +274,45 @@ events.SeriesClick("TypePieClick")
         var cat = e.category;
         //var item = e.dataItem.Risk_Type;
         $("#obsGrid").data("kendoGrid").dataSource.read({ category: cat, dataType: "3", gridAction: "False" });
+
+    }
+
+    var map = null;
+
+    function getMap() {
+        debugger;
+        //mp = new Microsoft.maps.map($('#dvMap', { credentials: key }));
+        map = new Microsoft.Maps.Map(document.getElementById('dvMap'), { credentials: key });
+        loadTrafficModule();
+       addDefaultPushpin();
+    }
+
+    function addDefaultPushpin() {
+        var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
+        map.entities.push(pushpin);
+        pushpin.setLocation(new Microsoft.Maps.Location(lat, long));
+    }    function loadTrafficModule() {
+        Microsoft.Maps.loadModule('Microsoft.Maps.Traffic', { callback: trafficModuleLoaded });
+           }    function trafficModuleLoaded() {
+        setMapView();
+        showTrafficLayer();
+    }    function setMapView() {
+        map.setView({ zoom: 10, center: new Microsoft.Maps.Location(lat, long) })
+    }
+    function showTrafficLayer() {
+        setMapView();
+        trafficLayer = new Microsoft.Maps.Traffic.TrafficLayer(map);
+        // show the traffic Layer
+        trafficLayer.show();
+    }    function Changed(e)
+    {
+        debugger;
+        var entityGrid = $("#obsGrid").data("kendoGrid");
+        var selectedItem = entityGrid.dataItem(entityGrid.select());
+        long = selectedItem.Long;
+        lat = selectedItem.Lat;
+        getMap();
+
 
     }
 </script>
