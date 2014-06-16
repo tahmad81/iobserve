@@ -15,10 +15,12 @@ namespace iobserve_Azure.Controllers
         public ActionResult Dashboard()
         {
 
-            var startDate = DateTime.Today.AddDays(-1);
-            var endData = DateTime.Today;
-            SetSession(startDate, endData);
-            return View(new Models.DashboardModel() { Duration = 3, StartDate = DateTime.Today.AddDays(-1), Enddate = DateTime.Today });
+            DateTime baseDate = DateTime.Today;
+            var today = baseDate;
+            var yesterday = baseDate.AddDays(-1);
+            var thisWeekStart = baseDate.AddDays(-(int)baseDate.DayOfWeek);
+            SetSession(thisWeekStart, DateTime.Today);
+            return View(new Models.DashboardModel() { Duration = 2, StartDate = DateTime.Today.AddDays(-1), Enddate = DateTime.Today });
         }
         public ActionResult _LoadObservations([DataSourceRequest] DataSourceRequest request, string category, string dataType, string riskLevel, string gridAction)
         {

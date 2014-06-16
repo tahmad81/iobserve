@@ -5,8 +5,8 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 1px;
-    padding-right: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */

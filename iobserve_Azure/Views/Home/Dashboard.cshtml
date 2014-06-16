@@ -7,7 +7,7 @@
 <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { name = "form", id = "form" }))
 {
 
     <table style="width:100%; margin-top:0px">
@@ -207,6 +207,9 @@ events.SeriesClick("TypePieClick")
     var long, lat;
     $(document).ready(function () {
 
+
+
+
         //  $("#rdcm").prop("checked", true);
         $('input[type="radio"]').change(function () {
             var e = this;
@@ -217,21 +220,29 @@ events.SeriesClick("TypePieClick")
             else {
                 $('#dtFrom').data('kendoDatePicker').enable(false);
                 $('#dtTo').data('kendoDatePicker').enable(false);
+                debugger;
+                $('#form').submit();
             }
-            debugger;
-            //var d = new Date();
-            //var dd = new Date(d.setDate(d.getDate() - 30));
+           
 
-            //var day = d.getDay();
-            //diff = d.getDate() - day + (day == 0 ? -6 : 0);
-            //var PweekStartDate = Date(d.setDate(diff));
-            //alert(PweekStartDate);
 
         });
 
         //getMap();
 
     });
+
+    function Bound() {
+
+        debugger;
+        var fRow = this.element.find('tbody tr:first');
+
+        fRow.addClass('k-state-selected')
+        if (fRow.length > 0) {
+            SetLonLat();
+            getMap();
+        }
+    }
 
     $.ajax({
         type: "GET",
@@ -284,19 +295,24 @@ events.SeriesClick("TypePieClick")
         //mp = new Microsoft.maps.map($('#dvMap', { credentials: key }));
         map = new Microsoft.Maps.Map(document.getElementById('dvMap'), { credentials: key });
         loadTrafficModule();
-       addDefaultPushpin();
+        addDefaultPushpin();
     }
 
     function addDefaultPushpin() {
         var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), null);
         map.entities.push(pushpin);
-        pushpin.setLocation(new Microsoft.Maps.Location(lat, long));
-    }    function loadTrafficModule() {
+        pushpin.setLocation(new Microsoft.Maps.Location(lat, long));
+
+    }
+    function loadTrafficModule() {
         Microsoft.Maps.loadModule('Microsoft.Maps.Traffic', { callback: trafficModuleLoaded });
-           }    function trafficModuleLoaded() {
+
+    }
+    function trafficModuleLoaded() {
         setMapView();
         showTrafficLayer();
-    }    function setMapView() {
+    }
+    function setMapView() {
         map.setView({ zoom: 10, center: new Microsoft.Maps.Location(lat, long) })
     }
     function showTrafficLayer() {
@@ -304,15 +320,19 @@ events.SeriesClick("TypePieClick")
         trafficLayer = new Microsoft.Maps.Traffic.TrafficLayer(map);
         // show the traffic Layer
         trafficLayer.show();
-    }    function Changed(e)
-    {
-        debugger;
+    }
+    function SetLonLat() {
         var entityGrid = $("#obsGrid").data("kendoGrid");
         var selectedItem = entityGrid.dataItem(entityGrid.select());
         long = selectedItem.Long;
         lat = selectedItem.Lat;
+    }
+    function Changed(e) {
+        debugger;
+        SetLonLat();
         getMap();
 
 
     }
+
 </script>

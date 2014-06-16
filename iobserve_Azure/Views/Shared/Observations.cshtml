@@ -21,5 +21,11 @@
 .Scrollable()
 .Pageable()
 .Selectable()
-.Events (eve=> eve.Change("Changed"))
+.Events(eve => 
+    {
+        eve.Change("Changed");
+        eve.DataBound("Bound");
+    }
+
+)
 )
