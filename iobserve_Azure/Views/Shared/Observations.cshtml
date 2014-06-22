@@ -7,7 +7,9 @@
     column.Bound(m => m.StatusText);
     column.Bound(m => m.Supervisor_Notified);
     column.Bound(m => m.Risk_Eliminated);
-
+    column.Bound(o => o.Id).Title("").HeaderHtmlAttributes(new { style = "text-align:center" }).HtmlAttributes(new { style = "text-align:center" })
+         .ClientTemplate("<a style=color:black href= /Home/ObservationDetails?DetailId=#=LCId#&id=#=Id#>Details</a> ");
+        
 })
 .DataSource(datasource => datasource
     .Ajax()
@@ -21,6 +23,7 @@
 .Scrollable()
 .Pageable()
 .Selectable()
+.Resizable(m=> m.Columns(true))
 .Events(eve => 
     {
         eve.Change("Changed");

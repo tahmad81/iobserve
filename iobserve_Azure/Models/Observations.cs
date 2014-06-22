@@ -29,7 +29,8 @@ namespace iobserve_Azure.Models
         public string StatusText { get; set; }
         public string Lat { get; set; }
         public string Long { get; set; }
-    
+        public string Id { get; set; }
+        public string LCId  { get; set; }
     }
 
 }

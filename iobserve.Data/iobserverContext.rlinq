@@ -177,6 +177,52 @@
           <orm:column name="__createdAt" sql-type="datetimeoffset" nullable="false" length="3" scale="0" ado-type="DateTime" />
         </orm:field>
       </orm:class>
+      <orm:class name="V_question" uniqueId="12ba9ff1-10db-46d5-b4cf-3c1f128df8af">
+        <orm:table name="v_questions" schema="iobserve1" view="true" />
+        <orm:identity>
+          <orm:single-field field-name="_question_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_thumbnail" property="Thumbnail" behavior="readwrite" uniqueId="aa6c166c-12ac-48c4-89d8-497302ee7a65" type="System.String">
+          <orm:column name="thumbnail" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_seqno" property="Seqno" behavior="readwrite" uniqueId="df1f36d8-894e-4968-a7f0-3100b6216af7" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="seqno" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_scenario_name" property="Scenario_name" behavior="readwrite" uniqueId="d7349f8c-c03f-4d30-9bea-493c44911254" type="System.String">
+          <orm:column name="scenario_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_scenario_id" property="Scenario_id" behavior="readwrite" uniqueId="8d4dd02c-b7ee-4345-970f-f66f70508123" type="System.String">
+          <orm:column name="scenario_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_questionnaire_id" property="Questionnaire_id" behavior="readwrite" uniqueId="6eb5eb97-40d5-4c98-bfb6-c4496aa89a40" type="System.String">
+          <orm:column name="questionnaire_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_question_text" property="Question_text" behavior="readwrite" uniqueId="fb86be9b-edef-475a-a0a8-391c385ede9f" type="System.String">
+          <orm:column name="Question_text" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_question_id" property="Question_id" behavior="readwrite" uniqueId="90dde0d2-0f79-4d82-b779-6c6da1211d76" type="System.String">
+          <orm:column name="question_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" primary-key="true" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_qr_id" property="Qr_id" behavior="readwrite" uniqueId="31d7d42e-0f3d-4aaf-a8d4-028da680368a" type="System.String">
+          <orm:column name="qr_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_location_scenario_id" property="Location_scenario_id" behavior="readwrite" uniqueId="72dbbb0c-252a-4d04-8458-0c576d0d1711" type="System.String">
+          <orm:column name="location_scenario_id" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_location_id" property="Location_id" behavior="readwrite" uniqueId="0f7f0d97-9ee5-4272-94f8-903e12d66ec7" type="System.String">
+          <orm:column name="location_id" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_language_code" property="Language_code" behavior="readwrite" uniqueId="e9735ac8-eca7-4247-9099-e63bd4297bdd" type="System.String">
+          <orm:column name="language_code" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_answer_options_text" property="Answer_options_text" behavior="readwrite" uniqueId="687a17bd-559d-4025-8c11-eb0ad2b50e01" type="System.String">
+          <orm:column name="Answer_options_text" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_answer_format" property="Answer_format" behavior="readwrite" uniqueId="ae81e75f-f36f-424a-a3c4-ca6c09ac9710" type="System.String">
+          <orm:column name="answer_format" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="iobserve1">
       <orm:table name="reports" schema="iobserve1">
@@ -245,6 +291,21 @@
         <orm:column name="actiontaken" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
         <orm:column name="__createdAt" sql-type="datetimeoffset" nullable="false" length="3" scale="0" ado-type="DateTime" />
       </orm:table>
+      <orm:table name="v_questions" schema="iobserve1" view="true">
+        <orm:column name="thumbnail" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="seqno" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="scenario_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="scenario_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="questionnaire_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="Question_text" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="question_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" primary-key="true" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="qr_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="location_scenario_id" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="location_id" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="language_code" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="Answer_options_text" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="answer_format" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+      </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:source-strategy>Property</orm:source-strategy>
@@ -253,7 +314,7 @@
   </orm:orm>
   <ModelSettings xmlns="">
     <AppConfigConnectionPropertyName>Connection</AppConfigConnectionPropertyName>
-    <AppConfigConnectionString>server=tcp:wwl8j4ylj9.database.windows.net,1433;database=iObserve01;user id=hse2go@wwl8j4ylj9;password=azure@108;trusted_connection=False;encrypt=True;connection timeout=30</AppConfigConnectionString>
+    <AppConfigConnectionString>server=tcp:wwl8j4ylj9.database.windows.net,1433;database=iObserve01;user id=hse2go;password=azure@108;trusted_connection=False;encrypt=True;connection timeout=0</AppConfigConnectionString>
     <NamingSettings>
       <ClassRules>
         <CaseMode>PascalCase</CaseMode>
@@ -331,12 +392,28 @@
       <Property Id="449cdce7-eadc-403a-9b6d-7ce00d91318b" name="Status_text" label="Status_text : String" kind="Persistent" fieldName="_status_text" />
       <Property Id="951adc7e-a2cc-42d5-9f54-bebd35452dda" name="Supnotified" label="Supnotified : String" kind="Persistent" fieldName="_supnotified" />
     </DomainClass>
+    <DomainClass Id="12ba9ff1-10db-46d5-b4cf-3c1f128df8af" name="V_question" namespace="iobserve.Data" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="ae81e75f-f36f-424a-a3c4-ca6c09ac9710" name="Answer_format" label="Answer_format : String" kind="Persistent" fieldName="_answer_format" />
+      <Property Id="687a17bd-559d-4025-8c11-eb0ad2b50e01" name="Answer_options_text" label="Answer_options_text : String" kind="Persistent" fieldName="_answer_options_text" />
+      <Property Id="e9735ac8-eca7-4247-9099-e63bd4297bdd" name="Language_code" label="Language_code : String" kind="Persistent" fieldName="_language_code" />
+      <Property Id="0f7f0d97-9ee5-4272-94f8-903e12d66ec7" name="Location_id" label="Location_id : String" kind="Persistent" fieldName="_location_id" />
+      <Property Id="72dbbb0c-252a-4d04-8458-0c576d0d1711" name="Location_scenario_id" label="Location_scenario_id : String" kind="Persistent" fieldName="_location_scenario_id" />
+      <Property Id="31d7d42e-0f3d-4aaf-a8d4-028da680368a" name="Qr_id" label="Qr_id : String" kind="Persistent" fieldName="_qr_id" />
+      <Property Id="90dde0d2-0f79-4d82-b779-6c6da1211d76" name="Question_id" label="Question_id : String" kind="Persistent" identity="true" fieldName="_question_id" />
+      <Property Id="fb86be9b-edef-475a-a0a8-391c385ede9f" name="Question_text" label="Question_text : String" kind="Persistent" fieldName="_question_text" />
+      <Property Id="6eb5eb97-40d5-4c98-bfb6-c4496aa89a40" name="Questionnaire_id" label="Questionnaire_id : String" kind="Persistent" fieldName="_questionnaire_id" />
+      <Property Id="8d4dd02c-b7ee-4345-970f-f66f70508123" name="Scenario_id" label="Scenario_id : String" kind="Persistent" fieldName="_scenario_id" />
+      <Property Id="d7349f8c-c03f-4d30-9bea-493c44911254" name="Scenario_name" label="Scenario_name : String" kind="Persistent" fieldName="_scenario_name" />
+      <Property Id="df1f36d8-894e-4968-a7f0-3100b6216af7" name="Seqno" type="Int32" label="Seqno : Int32" nullable="true" kind="Persistent" fieldName="_seqno" />
+      <Property Id="aa6c166c-12ac-48c4-89d8-497302ee7a65" name="Thumbnail" label="Thumbnail : String" kind="Persistent" fieldName="_thumbnail" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="dbd21483-cbc0-4e77-b918-7a8ac445e471">
       <domainContainer name="iobserverContext" namespace="iobserve.Data" showPropertiesCompartment="true">
         <entitySetProperty name="Reports" namespace="iobserve.Data" type="Report" label="Reports : IQueryable&lt;iobserve.Data.Report&gt;" />
         <entitySetProperty name="V_reports" namespace="iobserve.Data" type="V_report" label="V_reports : IQueryable&lt;iobserve.Data.V_report&gt;" />
+        <entitySetProperty name="V_questions" namespace="iobserve.Data" type="V_question" label="V_questions : IQueryable&lt;iobserve.Data.V_question&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

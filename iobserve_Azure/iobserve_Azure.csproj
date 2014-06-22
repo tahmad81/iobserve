@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\Observations.cs" />
+    <Compile Include="Models\Question.cs" />
     <Compile Include="Models\RiskLevel.cs" />
     <Compile Include="Models\StatusModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -599,6 +600,7 @@
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Shared\Observations.cshtml" />
+    <Content Include="Views\Home\ObservationDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

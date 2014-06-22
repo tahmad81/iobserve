@@ -8,6 +8,7 @@ using iobserve.Data;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 namespace iobserve_Azure.Controllers
 {
     public class HomeController : Controller
@@ -46,12 +47,12 @@ namespace iobserve_Azure.Controllers
                     currentList = currentList.Where(a => a.Risk_Type == category).ToList();
                 }
                 System.Web.HttpContext.Current.Session["gridData"] = currentList;
-                return Json(currentList.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+                return Json(currentList.OrderByDescending(a => a.Date).ToList().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
             }
             else
             {
                 var data = System.Web.HttpContext.Current.Session["gridData"] as List<Models.Observations>;
-                return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+                return Json(data.OrderByDescending(a => a.Date).ToList().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
             }
         }
         public ActionResult _LoadObservationPartialView()
@@ -98,7 +99,9 @@ namespace iobserve_Azure.Controllers
                                      Supervisor_Notified = obs.Supnotified,
                                      StatusText = obs.Status_text,
                                      Long = obs.Lng,
-                                     Lat = obs.Lat
+                                     Lat = obs.Lat,
+                                     Id = obs.Id,
+                                     LCId = obs.Location_scenario_id
 
                                  }).ToList();
 
@@ -107,6 +110,61 @@ namespace iobserve_Azure.Controllers
             return null;
         }
         #endregion
+        //string dd = "ANSWER, PgS1_q1a5, PgS1_q1a4, PgS1_q1a1, PgS1_q1a2, PgS1_q1a3";
+        public ActionResult ObservationDetails(string DetailId, string id)
+        {
+            var lstQ = new List<Models.Question>();
+            using (iobserve.Data.iobserverContext context = new iobserverContext())
+            {
+                var data = System.Web.HttpContext.Current.Session["data"] as List<V_report>;
+                var response = data.Where(a => a.Id == id).Select(a => a.Response_array).FirstOrDefault();
+                var questions = context.V_questions.Where(a => a.Location_scenario_id == DetailId && a.Language_code == "en").OrderBy(a => a.Seqno).ToList();
+
+                //\q1+\a\d+
+                Debug.WriteLine(response);
+                Debug.WriteLine("Total questions found : " + questions.Count.ToString());
+                questions.ForEach(q =>
+                {
+                    var question = new iobserve_Azure.Models.Question();
+
+                    question.QuestionText = q.Question_text;
+                    var qData = q.Answer_options_text.Split(new char[] { ';' });
+                    question.Type = q.Answer_format;
+                    question.SequenceNo = q.Seqno.GetValueOrDefault();
+                    int ansOptSequenceno=1;
+                    List<Models.AnswerOptions> optList = new List<Models.AnswerOptions>();
+
+                    qData.ToList().ForEach(ans =>
+                    {
+                        optList.Add(new Models.AnswerOptions
+                        {
+                            OptionText = ans,
+                            SequenceNo = ansOptSequenceno++
+
+
+                        });
+
+                    });
+                    var wno = q.Seqno.ToString();
+                    string pattern = @"q" + wno + @"a(?<AnsNo>\d+)";
+                    var matches = Regex.Matches(response, pattern);
+                    if (matches.Count == 0) Debug.WriteLine("Question no : " + wno + " No match");
+                    foreach (Match m in matches)
+                    {
+                        var ans =int.Parse(m.Groups["AnsNo"].Value);
+                     Models.AnswerOptions cAnsOption=  optList.Where(a => a.SequenceNo == ans).FirstOrDefault();
+                     cAnsOption.IsSelected = true;
+                        Debug.WriteLine("Question No :" + wno.ToString() + " " + "Answer No :" + ans.ToString());
+
+
+                    }
+                    question.AnswerOptionList = optList;
+                    lstQ.Add(question);
+                });
+            }
+            return View(lstQ);
+        }
+
         [HttpPost()]
         public ActionResult Dashboard(Models.DashboardModel model)
         {

@@ -1,0 +1,25 @@
+﻿@model List<iobserve_Azure.Models.Question>
+<h2>Observation Details</h2>
+@{
+    ViewBag.Title = "Observation Details";
+    foreach (var m in Model)
+    {
+        <div  class="container" style="border:solid 1px black;padding-left:10px;background-color:lightblue;border-radius:3px;margin:10px">
+            <label style="font-weight:bold; display:inline-block; font-style:italic">@m.QuestionText</label><br />
+            @foreach (var mm in m.AnswerOptionList)
+            {
+
+                <input type="@m.Type" checked="@mm.IsSelected" id="@m.SequenceNo"> @mm.OptionText<br />
+
+            }
+
+
+        </div>
+
+
+    }
+}
+
+
+
+

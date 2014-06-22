@@ -50,6 +50,9 @@
     <Compile Include="Report.generated.cs">
       <DependentUpon>iobserverContext.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="V_question.generated.cs">
+      <DependentUpon>iobserverContext.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="V_report.generated.cs">
       <DependentUpon>iobserverContext.rlinq</DependentUpon>
     </Compile>
