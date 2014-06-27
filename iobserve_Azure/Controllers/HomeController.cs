@@ -72,7 +72,7 @@ namespace iobserve_Azure.Controllers
                 using (iobserverContext context = new iobserverContext())
                 {
                     var data = context.V_reports.Where(a => a.Language_code == "en" && a.__createdAt >= startDate && a.__createdAt <= endData).ToList();
-
+                    //var data = context.V_reports.Where(a => a.Language_code == "en").Take(10).ToList();
                     System.Web.HttpContext.Current.Session.Add("data", data);
                     System.Web.HttpContext.Current.Session.Add("gridData", Load_Observations());
                 }
@@ -101,7 +101,8 @@ namespace iobserve_Azure.Controllers
                                      Long = obs.Lng,
                                      Lat = obs.Lat,
                                      Id = obs.Id,
-                                     LCId = obs.Location_scenario_id
+                                     LCId = obs.Location_scenario_id,
+                                     Image = obs.Media_picture_id
 
                                  }).ToList();
 
@@ -114,10 +115,20 @@ namespace iobserve_Azure.Controllers
         public ActionResult ObservationDetails(string DetailId, string id)
         {
             var lstQ = new List<Models.Question>();
+            List<string> StatusList = new List<string>();
+            StatusList.Add("Submitted");
+            StatusList.Add("Reviewed");
+            StatusList.Add("Pending");
+            StatusList.Add("Closed");
+            System.Web.HttpContext.Current.Session["StatusList"] = StatusList;
             using (iobserve.Data.iobserverContext context = new iobserverContext())
             {
+
                 var data = System.Web.HttpContext.Current.Session["data"] as List<V_report>;
-                var response = data.Where(a => a.Id == id).Select(a => a.Response_array).FirstOrDefault();
+                //var response = data.Where(a => a.Id == id).FirstOrDefault();
+                var response = context.V_reportsdetails.Where(a => a.Id == id).FirstOrDefault();
+                response.Status_text = "Reviewed";
+                //context.SaveChanges();
                 var questions = context.V_questions.Where(a => a.Location_scenario_id == DetailId && a.Language_code == "en").OrderBy(a => a.Seqno).ToList();
 
                 //\q1+\a\d+
@@ -131,7 +142,7 @@ namespace iobserve_Azure.Controllers
                     var qData = q.Answer_options_text.Split(new char[] { ';' });
                     question.Type = q.Answer_format;
                     question.SequenceNo = q.Seqno.GetValueOrDefault();
-                    int ansOptSequenceno=1;
+                    int ansOptSequenceno = 1;
                     List<Models.AnswerOptions> optList = new List<Models.AnswerOptions>();
 
                     qData.ToList().ForEach(ans =>
@@ -147,24 +158,47 @@ namespace iobserve_Azure.Controllers
                     });
                     var wno = q.Seqno.ToString();
                     string pattern = @"q" + wno + @"a(?<AnsNo>\d+)";
-                    var matches = Regex.Matches(response, pattern);
+                    var matches = Regex.Matches(response.Response_array, pattern);
                     if (matches.Count == 0) Debug.WriteLine("Question no : " + wno + " No match");
                     foreach (Match m in matches)
                     {
-                        var ans =int.Parse(m.Groups["AnsNo"].Value);
-                     Models.AnswerOptions cAnsOption=  optList.Where(a => a.SequenceNo == ans).FirstOrDefault();
-                     cAnsOption.IsSelected = true;
-                        Debug.WriteLine("Question No :" + wno.ToString() + " " + "Answer No :" + ans.ToString());
-
+                        var ans = int.Parse(m.Groups["AnsNo"].Value);
+                        Models.AnswerOptions cAnsOption = optList.Where(a => a.SequenceNo == ans).FirstOrDefault();
+                        if (cAnsOption != null)
+                        {
+                            cAnsOption.IsSelected = true;
+                            Debug.WriteLine("Question No :" + wno.ToString() + " " + "Answer No :" + ans.ToString());
+                        }
 
                     }
                     question.AnswerOptionList = optList;
                     lstQ.Add(question);
                 });
+                //                [6/22/2014 6:07:52 PM] Faisal Asif: Supervisor notified?
+                //Work Stopped? (I am verifying this)
+                //Risk Level
+                //Cutomer Information
+                //Action Taken:
+                //supp notified,
+                //risk eliminated,
+                //notes,
+                //status
+                return View(new Models.QuestionDetails { SupervisorNotified = response.Supnotified, RiskEliminated = "YES", Comments = "Some Comments", SelectedStatus = response.Status_text, Questions = lstQ, Image = response.Media_picture_id, Id = response.Id, RiskLevel = response.Risklevel, CustomerInfo = response.Customer, ActionTaken = response.Actiontaken });
             }
-            return View(lstQ);
         }
+        [HttpPost()]
+        public ActionResult ObservationDetails(Models.QuestionDetails model)
+        {
+            using (iobserve.Data.iobserverContext  context = new iobserverContext ())
+            {
+                var data = context.V_reportsdetails.Where(a => a.Id == model.Id).FirstOrDefault();
+                data.Remarks = model.Comments;
+                data.Status_text = model.SelectedStatus;
+                context.SaveChanges();
+            }
 
+            return View(model);
+        }
         [HttpPost()]
         public ActionResult Dashboard(Models.DashboardModel model)
         {
@@ -206,8 +240,6 @@ namespace iobserve_Azure.Controllers
                     model.StartDate = lastMonthStart;
                     model.Enddate = lastMonthEnd;
                     break;
-
-
             }
 
             return View(model);

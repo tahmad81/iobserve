@@ -56,6 +56,9 @@
     <Compile Include="V_report.generated.cs">
       <DependentUpon>iobserverContext.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="V_reportsdetail.generated.cs">
+      <DependentUpon>iobserverContext.rlinq</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <OpenAccessDeploy Include="iobserverContext.rlinq">

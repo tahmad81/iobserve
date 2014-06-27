@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Dashboard";
+    List<string> seriesColor = new List<string>();
+    seriesColor.Add("Red");
+    seriesColor.Add("Orange");
+    seriesColor.Add("Green");
 }
 
 <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
@@ -170,7 +174,8 @@ events.SeriesClick("StatusPieClick")
           .Events(events =>
 events.SeriesClick("TypePieClick")
 
-          )
+
+          ).SeriesColors(seriesColor)
 
                     )
                 </div>

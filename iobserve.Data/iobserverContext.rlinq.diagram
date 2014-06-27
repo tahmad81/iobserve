@@ -19,12 +19,20 @@
           <elementListCompartment Id="19eb0a74-1a7a-45c8-8d33-9d18a322e885" absoluteBounds="1.015, 6.4613151041666654, 2.3449999999999998, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
         </nestedChildShapes>
       </classShape>
-      <classShape Id="283b992e-268c-4a97-83a0-dcb95222dc85" absoluteBounds="6, 1.5, 1.625, 3.878087565104166">
+      <classShape Id="283b992e-268c-4a97-83a0-dcb95222dc85" isExpanded="false" absoluteBounds="6, 1.5, 1.625, 0.5">
         <DomainClassMoniker name="/iobserverContext/V_question" />
         <nestedChildShapes>
           <elementListCompartment Id="13e64f08-e666-46a5-b3da-18de7db6d9b6" absoluteBounds="6.015, 2.01, 1.5950000000000002, 2.749308268229167" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
           <elementListCompartment Id="30bdc793-ea4a-41e8-a365-dddb1a30cade" absoluteBounds="6.015, 4.7693082682291665, 1.5950000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
           <elementListCompartment Id="32a13d49-79d1-45af-9a3a-f29b61188128" absoluteBounds="6.015, 5.0286979166666663, 1.5950000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
+      <classShape Id="4f719e82-ae93-43a5-b36a-c05a4807ec0a" isExpanded="false" absoluteBounds="3.25, 1, 1.5, 0.5">
+        <DomainClassMoniker name="/iobserverContext/V_reportsdetail" />
+        <nestedChildShapes>
+          <elementListCompartment Id="5d52c894-8383-47f4-a229-8484bfce9bb4" absoluteBounds="3.265, 1.5099999999999998, 1.4700000000000002, 5.4415283203125" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="b349e942-73f0-4798-9985-09d8051133ef" absoluteBounds="3.265, 6.9615283203125, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="4797d3de-9536-4496-ab14-447434906e40" absoluteBounds="3.265, 7.2209179687499994, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
         </nestedChildShapes>
       </classShape>
     </nestedChildShapes>

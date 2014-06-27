@@ -74,6 +74,14 @@ namespace iobserve.Data
 			}
 		}
 		
+		public IQueryable<V_reportsdetail> V_reportsdetails 
+		{
+			get
+			{
+				return this.GetAll<V_reportsdetail>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -104,6 +112,10 @@ namespace iobserve.Data
 			get;
 		}
 		IQueryable<V_question> V_questions
+		{
+			get;
+		}
+		IQueryable<V_reportsdetail> V_reportsdetails
 		{
 			get;
 		}

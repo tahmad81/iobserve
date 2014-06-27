@@ -132,6 +132,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.zoom.js" />
+    <Content Include="Content\jquery.zoom.min.js" />
     <Content Include="Content\kendo\2014.1.528\Black\editor.png" />
     <Content Include="Content\kendo\2014.1.528\Black\imagebrowser.png" />
     <Content Include="Content\kendo\2014.1.528\Black\indeterminate.gif" />

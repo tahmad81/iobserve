@@ -31,6 +31,7 @@ namespace iobserve_Azure.Models
         public string Long { get; set; }
         public string Id { get; set; }
         public string LCId  { get; set; }
+        public string Image { get; set; }
     }
 
 }

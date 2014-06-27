@@ -1,19 +1,59 @@
-﻿@model List<iobserve_Azure.Models.Question>
+﻿@model iobserve_Azure.Models.QuestionDetails
 <h2>Observation Details</h2>
 @{
     ViewBag.Title = "Observation Details";
-    foreach (var m in Model)
+
+    <div id="kk1" style="margin-left:10px; margin-bottom:10px; height:100%; width:100%">
+        <img id="myimg1" src="@Model.Image" alt="Red dot">
+    </div>
+    using(Html.BeginForm())
     {
-        <div class="container" style="border:solid 1px black;padding-left:10px;background-color:lightblue;border-radius:3px;margin:10px">
-            <label style="font-weight:bold; display:inline-block; font-style:italic">@m.QuestionText</label><br />
-            @foreach (var mm in m.AnswerOptionList)
+        if (Model.Questions != null)
+        {
+            foreach (var m in Model.Questions)
             {
-                <input type="@m.Type" checked="@mm.IsSelected" id="@m.SequenceNo"> @mm.OptionText<br />
+                <div id="Questions" style="border:solid 1px black;padding-left:10px;background-color:lightblue;border-radius:3px;margin:10px">
+                    <label style="font-weight:bold; display:inline-block; font-style:italic">@m.QuestionText</label><br />
+
+                    @foreach (var mm in m.AnswerOptionList)
+                    {
+                        <input type="@m.Type" checked="@mm.IsSelected" id="@m.SequenceNo"> @mm.OptionText<br />
+                    }
+                </div>
             }
+        }
+        //Work Stopped? (I am verifying this)
+        //Risk Level
+        //Cutomer Information
+        //Action Taken:
+        //supp notified,
+        //risk eliminated,
+        //notes,
+        //status
+        <div style="border:solid 1px black;padding-left:10px; padding-bottom:10px; background-color:lightblue;border-radius:3px;margin:10px">
+            <label style="font-weight:bold">Work Stopped ?</label>
+            YES <br />
+            <label style="font-weight:bold">Risk Level</label>
+            <label id="RiskLevel">@Model.RiskLevel</label>
+          
+            <br />
+            <label style="font-weight:bold">Customer Information</label>
+            @Model.CustomerInfo<br />
+            <label style="font-weight:bold">Action Taken</label>
+            @Model.ActionTaken<br />
+            <label style="font-weight:bold">Supervisor Notified</label>
+            @Model.SupervisorNotified<br />
+            <label style="font-weight:bold">Risk Eliminated</label>
+            @Model.RiskEliminated<br />
+            <label style="font-weight:bold; vertical-align:central">Notes</label>
+            @Html.TextAreaFor(m => m.Comments, new { @style = "height:100px;width:250px;margin-bottom:10px" })<br />
+            <label style="font-weight:bold; vertical-align:central">Status</label>
+            @Html.Kendo().ComboBoxFor(m => m.SelectedStatus).BindTo(new SelectList(Session["StatusList"] as IEnumerable<string>, "", "")).HtmlAttributes(new { @style = "width:250px" }).HighlightFirst(true).SelectedIndex(0)
+
+
+
         </div>
+        @Html.Kendo().Button().Content("Save Changes").Name("btnSave").HtmlAttributes(new { @style = "margin-left:10px" })
     }
+
 }
-
-
-
-
