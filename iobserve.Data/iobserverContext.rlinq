@@ -76,8 +76,20 @@
         <orm:field name="_lat" property="Lat" behavior="readwrite" uniqueId="7cecdf54-2c1d-4c11-9bd4-58cd9b0145f0" type="System.String">
           <orm:column name="lat" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
         </orm:field>
-        <orm:field name="_reportstatus" property="Reportstatus" behavior="readwrite" uniqueId="af4d6c38-e4cf-4605-b1dc-8336375cb364" type="System.String">
-          <orm:column name="reportstatus" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:field name="_workstopped" property="Workstopped" behavior="readwrite" uniqueId="2dc6a58a-b9b7-4275-9526-8092b62268d4" type="System.String">
+          <orm:column name="workstopped" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_observation_date" property="Observation_date" behavior="readwrite" uniqueId="ee867e2e-f827-43e1-bcb2-58d930c7739d" type="System.Nullable`1[[System.DateTimeOffset, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="observation_date" sql-type="datetimeoffset" nullable="true" length="3" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_notes" property="Notes" behavior="readwrite" uniqueId="afe1d897-6774-4d0c-9358-aec39c34eb5c" type="System.String">
+          <orm:column name="notes" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_media_signature" property="Media_signature" behavior="readwrite" uniqueId="6891c87e-c42d-472c-988a-ce98f10c3034" type="System.String">
+          <orm:column name="media_signature" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_feedback" property="Feedback" behavior="readwrite" uniqueId="0b390cc3-1b80-4cc8-9a15-c0ab2bd1c977" type="System.String">
+          <orm:column name="feedback" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
         </orm:field>
         <orm:index name="__createdAt" clustered="true">
           <orm:columnMapping>
@@ -311,6 +323,46 @@
           <orm:column name="__createdAt" sql-type="datetimeoffset" nullable="false" length="3" scale="0" ado-type="DateTime" />
         </orm:field>
       </orm:class>
+      <orm:class name="Caption" uniqueId="62ba7373-05e0-4466-886a-9b9b38d228b4">
+        <orm:table name="captions" schema="iobserve1" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="8813ba6c-7fb1-4d68-b519-60dbd22cf20b" type="System.String">
+          <orm:column name="id" sql-type="nvarchar" nullable="false" length="255" scale="0" primary-key="true" has-default-value="true" backend-calculated="true" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_label_id" property="Label_id" behavior="readwrite" uniqueId="505e5856-8b12-408f-8c7f-d01a4f0e3fd2" type="System.String">
+          <orm:column name="label_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_language_code" property="Language_code" behavior="readwrite" uniqueId="3b063f19-348d-4623-a89c-eca4360bd41a" type="System.String">
+          <orm:column name="language_code" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_label_text" property="Label_text" behavior="readwrite" uniqueId="7bded4dc-afa8-49b1-b9ce-e194cc7b2cd2" type="System.String">
+          <orm:column name="label_text" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_label_description" property="Label_description" behavior="readwrite" uniqueId="5a004a3e-9a2a-4866-8f1c-d4fc0504b2ba" type="System.String">
+          <orm:column name="label_description" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_remarks" property="Remarks" behavior="readwrite" uniqueId="80730a50-fe57-4682-910c-5a4409836b4a" type="System.String">
+          <orm:column name="remarks" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="___createdat" property="__createdat" behavior="readwrite" uniqueId="c37f017b-0ee1-464a-b842-37b27e65a7f7" type="System.DateTimeOffset">
+          <orm:column name="__createdat" sql-type="datetimeoffset" nullable="false" length="3" scale="0" has-default-value="true" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="___updatedat" property="__updatedat" behavior="readwrite" uniqueId="10d338fa-46e6-4400-a5f1-70185fbf8019" type="System.DateTimeOffset">
+          <orm:column name="__updatedat" sql-type="datetimeoffset" nullable="false" length="3" scale="0" has-default-value="true" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_tablecol" property="Tablecol" behavior="readwrite" uniqueId="73d35fa6-eca8-4cb7-8248-4f85cfcebc1e" type="System.String">
+          <orm:column name="tablecol" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_master_caption" property="Master_caption" behavior="readwrite" uniqueId="fc68bbe6-4fd1-4b9b-917f-1c6ff3f038a0" type="System.String">
+          <orm:column name="master_caption" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="iobserve1">
       <orm:table name="reports" schema="iobserve1">
@@ -335,7 +387,11 @@
         <orm:column name="response_array" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
         <orm:column name="media_picture_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
         <orm:column name="lat" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
-        <orm:column name="reportstatus" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="workstopped" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="observation_date" sql-type="datetimeoffset" nullable="true" length="3" scale="0" ado-type="DateTime" />
+        <orm:column name="notes" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="media_signature" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="feedback" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
         <orm:index name="__createdAt" clustered="true">
           <orm:columnMapping>
             <orm:column name="__createdAt" sql-type="datetimeoffset" nullable="false" length="3" scale="0" has-default-value="true" ado-type="DateTime" />
@@ -351,6 +407,18 @@
             <orm:column name="observer_id" sql-type="nvarchar" nullable="true" length="450" scale="0" ado-type="UnicodeStringVariableLength" />
           </orm:columnMapping>
         </orm:index>
+      </orm:table>
+      <orm:table name="captions" schema="iobserve1">
+        <orm:column name="id" sql-type="nvarchar" nullable="false" length="255" scale="0" primary-key="true" has-default-value="true" backend-calculated="true" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="label_id" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="language_code" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="label_text" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="label_description" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="remarks" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="__createdat" sql-type="datetimeoffset" nullable="false" length="3" scale="0" has-default-value="true" ado-type="DateTime" />
+        <orm:column name="__updatedat" sql-type="datetimeoffset" nullable="false" length="3" scale="0" has-default-value="true" ado-type="DateTime" />
+        <orm:column name="tablecol" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="master_caption" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
       </orm:table>
       <orm:table name="v_reports" schema="iobserve1" view="true">
         <orm:column name="supnotified" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
@@ -476,11 +544,15 @@
       <Property Id="295502a5-9d6b-4cb2-9597-3ce316cd2508" name="Media_video_id" label="Media_video_id : String" kind="Persistent" fieldName="_media_video_id" />
       <Property Id="478a286a-648c-4997-ba89-249e82707f6c" name="Observer_id" label="Observer_id : String" kind="Persistent" fieldName="_observer_id" />
       <Property Id="b4a9b7db-21ac-48dc-83f1-7ba95e96dbd9" name="Remarks" label="Remarks : String" kind="Persistent" fieldName="_remarks" />
-      <Property Id="af4d6c38-e4cf-4605-b1dc-8336375cb364" name="Reportstatus" label="Reportstatus : String" kind="Persistent" fieldName="_reportstatus" />
       <Property Id="0f02a719-0f97-418a-9f1e-1aed9a133a91" name="Response_array" label="Response_array : String" kind="Persistent" fieldName="_response_array" />
       <Property Id="a6ea06b3-f6e3-438c-9190-b61ab6ca42c3" name="Risklevel" label="Risklevel : String" kind="Persistent" fieldName="_risklevel" />
       <Property Id="fcfa4411-41d6-47c8-bd25-2a6f270aa376" name="Status_label_id" label="Status_label_id : String" kind="Persistent" fieldName="_status_label_id" />
       <Property Id="9583f981-0ec4-45b8-9e10-9453631dc3b6" name="Supnotified" label="Supnotified : String" kind="Persistent" fieldName="_supnotified" />
+      <Property Id="2dc6a58a-b9b7-4275-9526-8092b62268d4" name="Workstopped" label="Workstopped : String" kind="Persistent" fieldName="_workstopped" />
+      <Property Id="ee867e2e-f827-43e1-bcb2-58d930c7739d" name="Observation_date" type="DateTimeOffset" label="Observation_date : DateTimeOffset" nullable="true" kind="Persistent" fieldName="_observation_date" />
+      <Property Id="afe1d897-6774-4d0c-9358-aec39c34eb5c" name="Notes" label="Notes : String" kind="Persistent" fieldName="_notes" />
+      <Property Id="6891c87e-c42d-472c-988a-ce98f10c3034" name="Media_signature" label="Media_signature : String" kind="Persistent" fieldName="_media_signature" />
+      <Property Id="0b390cc3-1b80-4cc8-9a15-c0ab2bd1c977" name="Feedback" label="Feedback : String" kind="Persistent" fieldName="_feedback" />
     </DomainClass>
     <DomainClass Id="0deb6e13-599b-49dc-b976-ecf0fe257e2e" name="V_report" namespace="iobserve.Data" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="ee35f910-5213-4b20-8304-c17f0fbf57fc" name="__createdAt" type="DateTimeOffset" label="__createdAt : DateTimeOffset" kind="Persistent" fieldName="___createdAt" />
@@ -553,6 +625,18 @@
       <Property Id="2dce3662-d980-490d-a31a-cb0cebeb6688" name="Supnotified" label="Supnotified : String" kind="Persistent" fieldName="_supnotified" />
       <Property Id="828f4ae6-96f6-43fd-8759-cd8695acb6de" name="Workstopped" label="Workstopped : String" kind="Persistent" fieldName="_workstopped" />
     </DomainClass>
+    <DomainClass Id="62ba7373-05e0-4466-886a-9b9b38d228b4" name="Caption" namespace="iobserve.Data" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="8813ba6c-7fb1-4d68-b519-60dbd22cf20b" name="Id" label="Id : String" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="c37f017b-0ee1-464a-b842-37b27e65a7f7" name="__createdat" type="DateTimeOffset" label="__createdat : DateTimeOffset" kind="Persistent" fieldName="___createdat" />
+      <Property Id="10d338fa-46e6-4400-a5f1-70185fbf8019" name="__updatedat" type="DateTimeOffset" label="__updatedat : DateTimeOffset" kind="Persistent" fieldName="___updatedat" />
+      <Property Id="5a004a3e-9a2a-4866-8f1c-d4fc0504b2ba" name="Label_description" label="Label_description : String" kind="Persistent" fieldName="_label_description" />
+      <Property Id="505e5856-8b12-408f-8c7f-d01a4f0e3fd2" name="Label_id" label="Label_id : String" kind="Persistent" fieldName="_label_id" />
+      <Property Id="7bded4dc-afa8-49b1-b9ce-e194cc7b2cd2" name="Label_text" label="Label_text : String" kind="Persistent" fieldName="_label_text" />
+      <Property Id="3b063f19-348d-4623-a89c-eca4360bd41a" name="Language_code" label="Language_code : String" kind="Persistent" fieldName="_language_code" />
+      <Property Id="fc68bbe6-4fd1-4b9b-917f-1c6ff3f038a0" name="Master_caption" label="Master_caption : String" kind="Persistent" fieldName="_master_caption" />
+      <Property Id="80730a50-fe57-4682-910c-5a4409836b4a" name="Remarks" label="Remarks : String" kind="Persistent" fieldName="_remarks" />
+      <Property Id="73d35fa6-eca8-4cb7-8248-4f85cfcebc1e" name="Tablecol" label="Tablecol : String" kind="Persistent" fieldName="_tablecol" />
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="dbd21483-cbc0-4e77-b918-7a8ac445e471">
@@ -561,6 +645,7 @@
         <entitySetProperty name="V_reports" namespace="iobserve.Data" type="V_report" label="V_reports : IQueryable&lt;iobserve.Data.V_report&gt;" />
         <entitySetProperty name="V_questions" namespace="iobserve.Data" type="V_question" label="V_questions : IQueryable&lt;iobserve.Data.V_question&gt;" />
         <entitySetProperty name="V_reportsdetails" namespace="iobserve.Data" type="V_reportsdetail" label="V_reportsdetails : IQueryable&lt;iobserve.Data.V_reportsdetail&gt;" />
+        <entitySetProperty name="Captions" namespace="iobserve.Data" type="Caption" label="Captions : IQueryable&lt;iobserve.Data.Caption&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

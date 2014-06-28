@@ -13,15 +13,27 @@ namespace iobserve_Azure.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Dashboard()
+        public ActionResult Dashboard(bool? isReload)
         {
-
             DateTime baseDate = DateTime.Today;
             var today = baseDate;
             var yesterday = baseDate.AddDays(-1);
             var thisWeekStart = baseDate.AddDays(-(int)baseDate.DayOfWeek);
-            SetSession(thisWeekStart, DateTime.Today);
-            return View(new Models.DashboardModel() { Duration = 2, StartDate = DateTime.Today.AddDays(-1), Enddate = DateTime.Today });
+            if (isReload == null)
+            {
+                SetSession(thisWeekStart, DateTime.Today);
+                System.Web.HttpContext.Current.Session["duration"] = 2;
+                System.Web.HttpContext.Current.Session["sdate"] = thisWeekStart;
+                System.Web.HttpContext.Current.Session["edate"] = DateTime.Today;
+                return View(new Models.DashboardModel() { Duration = 2, StartDate = thisWeekStart, Enddate = DateTime.Today });
+            }
+            else
+            {
+                var duration = (int)System.Web.HttpContext.Current.Session["duration"];
+                var sdate = (DateTime)System.Web.HttpContext.Current.Session["sdate"];
+                var endate = (DateTime)System.Web.HttpContext.Current.Session["edate"];
+                return View(new Models.DashboardModel() { Duration = duration, StartDate = sdate, Enddate = endate });
+            }
         }
         public ActionResult _LoadObservations([DataSourceRequest] DataSourceRequest request, string category, string dataType, string riskLevel, string gridAction)
         {
@@ -72,7 +84,7 @@ namespace iobserve_Azure.Controllers
                 using (iobserverContext context = new iobserverContext())
                 {
                     var data = context.V_reports.Where(a => a.Language_code == "en" && a.__createdAt >= startDate && a.__createdAt <= endData).ToList();
-                    //var data = context.V_reports.Where(a => a.Language_code == "en").Take(10).ToList();
+                    // var data = context.V_reports.Where(a => a.Language_code == "en").Take(10).ToList();
                     System.Web.HttpContext.Current.Session.Add("data", data);
                     System.Web.HttpContext.Current.Session.Add("gridData", Load_Observations());
                 }
@@ -126,9 +138,19 @@ namespace iobserve_Azure.Controllers
 
                 var data = System.Web.HttpContext.Current.Session["data"] as List<V_report>;
                 //var response = data.Where(a => a.Id == id).FirstOrDefault();
+
+
+
+                var labelidFromCaptions = context.Captions.Where(a => a.Label_text == "Reviewed").FirstOrDefault().Label_id;
+                if (!string.IsNullOrEmpty(labelidFromCaptions))
+                {
+                    var statusToUpdate = context.Reports.Where(a => a.Id == id).FirstOrDefault();
+                    statusToUpdate.Status_label_id = labelidFromCaptions;
+                    context.SaveChanges();
+
+
+                }
                 var response = context.V_reportsdetails.Where(a => a.Id == id).FirstOrDefault();
-                response.Status_text = "Reviewed";
-                //context.SaveChanges();
                 var questions = context.V_questions.Where(a => a.Location_scenario_id == DetailId && a.Language_code == "en").OrderBy(a => a.Seqno).ToList();
 
                 //\q1+\a\d+
@@ -183,21 +205,21 @@ namespace iobserve_Azure.Controllers
                 //risk eliminated,
                 //notes,
                 //status
-                return View(new Models.QuestionDetails { SupervisorNotified = response.Supnotified, RiskEliminated = "YES", Comments = "Some Comments", SelectedStatus = response.Status_text, Questions = lstQ, Image = response.Media_picture_id, Id = response.Id, RiskLevel = response.Risklevel, CustomerInfo = response.Customer, ActionTaken = response.Actiontaken });
+                return View(new Models.QuestionDetails { SupervisorNotified = response.Supnotified, RiskEliminated = "YES", Comments = response.Remarks, SelectedStatus = response.Status_text, Questions = lstQ, Image = response.Media_picture_id, Id = response.Id, RiskLevel = response.Risklevel, CustomerInfo = response.Customer, ActionTaken = response.Actiontaken });
             }
         }
         [HttpPost()]
         public ActionResult ObservationDetails(Models.QuestionDetails model)
         {
-            using (iobserve.Data.iobserverContext  context = new iobserverContext ())
+            using (iobserve.Data.iobserverContext context = new iobserverContext())
             {
-                var data = context.V_reportsdetails.Where(a => a.Id == model.Id).FirstOrDefault();
+                var data = context.Reports.Where(a => a.Id == model.Id).FirstOrDefault();
                 data.Remarks = model.Comments;
-                data.Status_text = model.SelectedStatus;
+                var statusid = context.Captions.Where(a => a.Label_text == model.SelectedStatus).FirstOrDefault().Label_id;
+                data.Status_label_id = statusid;
                 context.SaveChanges();
             }
-
-            return View(model);
+            return RedirectToAction("Dashboard", new { @isReload = true });
         }
         [HttpPost()]
         public ActionResult Dashboard(Models.DashboardModel model)
@@ -241,7 +263,9 @@ namespace iobserve_Azure.Controllers
                     model.Enddate = lastMonthEnd;
                     break;
             }
-
+            System.Web.HttpContext.Current.Session["duration"] = model.Duration;
+            System.Web.HttpContext.Current.Session["sdate"] = model.StartDate;
+            System.Web.HttpContext.Current.Session["edate"] = model.Enddate;
             return View(model);
         }
         #region Charts

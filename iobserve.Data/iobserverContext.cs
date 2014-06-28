@@ -82,6 +82,14 @@ namespace iobserve.Data
 			}
 		}
 		
+		public IQueryable<Caption> Captions 
+		{
+			get
+			{
+				return this.GetAll<Caption>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -116,6 +124,10 @@ namespace iobserve.Data
 			get;
 		}
 		IQueryable<V_reportsdetail> V_reportsdetails
+		{
+			get;
+		}
+		IQueryable<Caption> Captions
 		{
 			get;
 		}

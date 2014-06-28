@@ -296,16 +296,68 @@ namespace iobserve.Data
 			}
 		}
 		
-		private string _reportstatus;
-		public virtual string Reportstatus
+		private string _workstopped;
+		public virtual string Workstopped
 		{
 			get
 			{
-				return this._reportstatus;
+				return this._workstopped;
 			}
 			set
 			{
-				this._reportstatus = value;
+				this._workstopped = value;
+			}
+		}
+		
+		private System.Nullable<System.DateTimeOffset> _observation_date;
+		public virtual System.Nullable<System.DateTimeOffset> Observation_date
+		{
+			get
+			{
+				return this._observation_date;
+			}
+			set
+			{
+				this._observation_date = value;
+			}
+		}
+		
+		private string _notes;
+		public virtual string Notes
+		{
+			get
+			{
+				return this._notes;
+			}
+			set
+			{
+				this._notes = value;
+			}
+		}
+		
+		private string _media_signature;
+		public virtual string Media_signature
+		{
+			get
+			{
+				return this._media_signature;
+			}
+			set
+			{
+				this._media_signature = value;
+			}
+		}
+		
+		private string _feedback;
+		public virtual string Feedback
+		{
+			get
+			{
+				return this._feedback;
+			}
+			set
+			{
+				this._feedback = value;
 			}
 		}
 		
