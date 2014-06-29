@@ -123,6 +123,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DashboardModel.cs" />
+    <Compile Include="Models\Label.cs" />
     <Compile Include="Models\Observations.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\RiskLevel.cs" />
@@ -603,6 +604,7 @@
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Shared\Observations.cshtml" />
     <Content Include="Views\Home\ObservationDetails.cshtml" />
+    <Content Include="Views\Home\ViewImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

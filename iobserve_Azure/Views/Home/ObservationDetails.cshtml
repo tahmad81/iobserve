@@ -1,12 +1,11 @@
 ﻿@model iobserve_Azure.Models.QuestionDetails
-<h2>Observation Details</h2>
 @{
     ViewBag.Title = "Observation Details";
-
-    <div id="kk1" style="margin-left:10px; margin-bottom:10px; height:100%; width:100%">
-        <img id="myimg1" src="@Model.Image" alt="Red dot">
+    @Html.Hidden("hdid", @Model.Id)
+    <div style="font-family:Trebuchet MS; font-size:18px;  padding:8px;  font-weight:bold; margin-left:0px; margin-right:0px; text-align:center; margin-top:5px; color:white; background-color:black">
+        Observation Details
     </div>
-    using(Html.BeginForm())
+    using (Html.BeginForm())
     {
         if (Model.Questions != null)
         {
@@ -31,29 +30,51 @@
         //notes,
         //status
         <div style="border:solid 1px black;padding-left:10px; padding-bottom:10px; background-color:lightblue;border-radius:3px;margin:10px">
-            <label style="font-weight:bold">Work Stopped ?</label>
-            YES <br />
-            <label style="font-weight:bold">Risk Level</label>
-            <label id="RiskLevel">@Model.RiskLevel</label>
-          
+
+
+            <div id="kk1" onclick="ImgClick" style="margin-left:0px; border:1px solid white; cursor:pointer; margin-bottom:0px; margin-top:5px; height:52px; width:52px">
+                <img id="myimg1" src="@Model.Image" style="height:50px; width:50px" alt="~/Images/noimage.jpg">
+            </div>
             <br />
-            <label style="font-weight:bold">Customer Information</label>
+            <label style="font-weight:bold">Work Stopped ?: </label>
+            YES <br />
+            <label style="font-weight:bold">Risk Level: </label>
+            @Model.RiskLevel
+
+            <br />
+            <label style="font-weight:bold">Customer Information: </label>
             @Model.CustomerInfo<br />
-            <label style="font-weight:bold">Action Taken</label>
+            <label style="font-weight:bold">Action Taken: </label>
             @Model.ActionTaken<br />
-            <label style="font-weight:bold">Supervisor Notified</label>
+            <label style="font-weight:bold">Supervisor Notified: </label>
             @Model.SupervisorNotified<br />
-            <label style="font-weight:bold">Risk Eliminated</label>
+            <label style="font-weight:bold">Risk Eliminated: </label>
             @Model.RiskEliminated<br />
-            <label style="font-weight:bold; vertical-align:central">Notes</label>
+            <label style="font-weight:bold; vertical-align:central">Notes:</label>
             @Html.TextAreaFor(m => m.Comments, new { @style = "height:100px;width:250px;margin-bottom:10px" })<br />
-            <label style="font-weight:bold; vertical-align:central">Status</label>
-            @Html.Kendo().ComboBoxFor(m => m.SelectedStatus).BindTo(new SelectList(Session["StatusList"] as IEnumerable<string>, "", "")).HtmlAttributes(new { @style = "width:250px" }).HighlightFirst(true).SelectedIndex(0)
+            <label style="font-weight:bold; vertical-align:central">Status:</label>
+            @Html.Kendo().ComboBoxFor(m => m.SelectedStatus).BindTo(new SelectList(Session["StatusList"] as IEnumerable<iobserve_Azure.Models.Labels>, "Label_Id", "Label")).HtmlAttributes(new { @style = "width:250px" }).HighlightFirst(true).SelectedIndex(0)
+
+
 
 
 
         </div>
         @Html.Kendo().Button().Content("Save Changes").Name("btnSave").HtmlAttributes(new { @style = "margin-left:10px" })
+       
     }
 
 }
+<script type="text/javascript">
+    function back() {
+
+        window.location.href = "/Home/Dashboard"
+
+    }
+
+
+    $("#kk1").click(function () {
+        var msg = $('#hdid').val();
+        window.open("/Home/ViewImage?id=" + msg);
+    });
+</script>

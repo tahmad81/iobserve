@@ -9,6 +9,7 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using iobserve_Azure.Models;
 namespace iobserve_Azure.Controllers
 {
     public class HomeController : Controller
@@ -29,6 +30,7 @@ namespace iobserve_Azure.Controllers
             }
             else
             {
+                ViewData["OperationMsg"] = "Observation Updated!";
                 var duration = (int)System.Web.HttpContext.Current.Session["duration"];
                 var sdate = (DateTime)System.Web.HttpContext.Current.Session["sdate"];
                 var endate = (DateTime)System.Web.HttpContext.Current.Session["edate"];
@@ -127,28 +129,26 @@ namespace iobserve_Azure.Controllers
         public ActionResult ObservationDetails(string DetailId, string id)
         {
             var lstQ = new List<Models.Question>();
-            List<string> StatusList = new List<string>();
-            StatusList.Add("Submitted");
-            StatusList.Add("Reviewed");
-            StatusList.Add("Pending");
-            StatusList.Add("Closed");
-            System.Web.HttpContext.Current.Session["StatusList"] = StatusList;
+            List<Models.Labels> StatusList = new List<Labels>();
+
+
             using (iobserve.Data.iobserverContext context = new iobserverContext())
             {
 
                 var data = System.Web.HttpContext.Current.Session["data"] as List<V_report>;
                 //var response = data.Where(a => a.Id == id).FirstOrDefault();
-
-
-
-                var labelidFromCaptions = context.Captions.Where(a => a.Label_text == "Reviewed").FirstOrDefault().Label_id;
-                if (!string.IsNullOrEmpty(labelidFromCaptions))
+                StatusList = (from label in context.Captions.Where(a => (a.Label_id == LabelIds.PENDING || a.Label_id == LabelIds.REVIEWED || a.Label_id == LabelIds.SUBMITTED) && a.Language_code == "en")
+                              select new Models.Labels
+                              {
+                                  Label_Id = label.Label_id,
+                                  Label = label.Label_text
+                              }).ToList();
+                System.Web.HttpContext.Current.Session["StatusList"] = StatusList;
+                var statusToUpdate = context.Reports.Where(a => a.Id == id).FirstOrDefault();
+                if (statusToUpdate.Status_label_id == LabelIds.SUBMITTED)
                 {
-                    var statusToUpdate = context.Reports.Where(a => a.Id == id).FirstOrDefault();
-                    statusToUpdate.Status_label_id = labelidFromCaptions;
+                    statusToUpdate.Status_label_id = LabelIds.REVIEWED;
                     context.SaveChanges();
-
-
                 }
                 var response = context.V_reportsdetails.Where(a => a.Id == id).FirstOrDefault();
                 var questions = context.V_questions.Where(a => a.Location_scenario_id == DetailId && a.Language_code == "en").OrderBy(a => a.Seqno).ToList();
@@ -215,11 +215,21 @@ namespace iobserve_Azure.Controllers
             {
                 var data = context.Reports.Where(a => a.Id == model.Id).FirstOrDefault();
                 data.Remarks = model.Comments;
-                var statusid = context.Captions.Where(a => a.Label_text == model.SelectedStatus).FirstOrDefault().Label_id;
-                data.Status_label_id = statusid;
+                //var statusid = context.Captions.Where(a => a.Label_text == model.SelectedStatus).FirstOrDefault().Label_id;
+                data.Status_label_id = model.SelectedStatus;
                 context.SaveChanges();
             }
             return RedirectToAction("Dashboard", new { @isReload = true });
+        }
+        [HttpGet()]
+        public ActionResult ViewImage(string id)
+        {
+            using (iobserve.Data.iobserverContext context = new iobserverContext())
+            {
+
+                var img = context.V_reportsdetails.Where(a => a.Id == id).Select(a => a.Media_picture_id).FirstOrDefault();
+                return View(new QuestionDetails { Image = img });
+            }
         }
         [HttpPost()]
         public ActionResult Dashboard(Models.DashboardModel model)
